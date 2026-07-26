@@ -15,6 +15,10 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
+import PrivateRoute from './components/layout/PrivateRoute';
+import AdminLayout from './components/layout/AdminLayout';
+import Dashboard from './pages/admin/Dashboard';
+
 function App() {
   return (
     <AuthProvider>
@@ -33,6 +37,11 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              
+              <Route path="/admin" element={<PrivateRoute><AdminLayout /></PrivateRoute>}>
+                <Route index element={<Dashboard />} />
+                <Route path="dashboard" element={<Dashboard />} />
+              </Route>
             </Routes>
           </main>
           
