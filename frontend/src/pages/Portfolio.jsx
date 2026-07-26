@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card, { CardContent } from '../components/ui/Card';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, GitBranch } from 'lucide-react';
 
 export default function Portfolio() {
   const [projects, setProjects] = useState([]);
@@ -94,7 +94,7 @@ export default function Portfolio() {
                   )}
                   {project.githubLink && (
                     <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm text-slate-300 hover:text-white transition-colors font-medium">
-                      <Github size={16} /> Source Code
+                      <GitBranch size={16} /> Source Code
                     </a>
                   )}
                 </div>
