@@ -1,8 +1,65 @@
+import React from 'react';
+import { Target, Users, Award } from 'lucide-react';
+
 export default function About() {
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold mb-4">About Us</h1>
-      <p className="text-slate-400">Our history, tech stack, and process.</p>
+    <div className="py-12 px-4">
+      <div className="text-center max-w-3xl mx-auto mb-16">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6">About DevForge</h1>
+        <p className="text-lg text-slate-400">
+          We are a team of passionate engineers, designers, and product strategists dedicated to crafting exceptional digital experiences.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
+        <div>
+          <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
+          <p className="text-slate-400 leading-relaxed mb-6">
+            At DevForge Innovations, our mission is to empower businesses through technology. We believe that great software is the differentiator in today's digital economy. We don't just write code; we solve complex business problems.
+          </p>
+          <p className="text-slate-400 leading-relaxed">
+            Founded with a vision to bridge the gap between stunning design and robust engineering, we deliver scalable solutions that grow alongside our clients.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="bg-surface-elevated/40 border border-slate-800 rounded-2xl p-6 text-center">
+            <div className="text-4xl font-extrabold text-primary mb-2">50+</div>
+            <div className="text-sm text-slate-400 font-medium">Projects Shipped</div>
+          </div>
+          <div className="bg-surface-elevated/40 border border-slate-800 rounded-2xl p-6 text-center">
+            <div className="text-4xl font-extrabold text-primary mb-2">15+</div>
+            <div className="text-sm text-slate-400 font-medium">Expert Engineers</div>
+          </div>
+          <div className="bg-surface-elevated/40 border border-slate-800 rounded-2xl p-6 text-center col-span-2">
+            <div className="text-4xl font-extrabold text-primary mb-2">99%</div>
+            <div className="text-sm text-slate-400 font-medium">Client Satisfaction Rate</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="text-center px-4">
+          <div className="mx-auto w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-6">
+            <Target className="text-primary" size={28} />
+          </div>
+          <h3 className="text-xl font-bold mb-3">Precision</h3>
+          <p className="text-slate-400 text-sm">Every pixel and line of code is meticulously crafted to ensure optimal performance and aesthetics.</p>
+        </div>
+        <div className="text-center px-4">
+          <div className="mx-auto w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-6">
+            <Users className="text-primary" size={28} />
+          </div>
+          <h3 className="text-xl font-bold mb-3">Collaboration</h3>
+          <p className="text-slate-400 text-sm">We work as an extension of your team, ensuring transparency and continuous communication.</p>
+        </div>
+        <div className="text-center px-4">
+          <div className="mx-auto w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-6">
+            <Award className="text-primary" size={28} />
+          </div>
+          <h3 className="text-xl font-bold mb-3">Excellence</h3>
+          <p className="text-slate-400 text-sm">We don't settle for average. Our standard is industry-leading software that drives measurable results.</p>
+        </div>
+      </div>
     </div>
   );
 }
