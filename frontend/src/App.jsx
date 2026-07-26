@@ -18,6 +18,7 @@ import Register from './pages/Register';
 import PrivateRoute from './components/layout/PrivateRoute';
 import AdminLayout from './components/layout/AdminLayout';
 import Dashboard from './pages/admin/Dashboard';
+import AdminProjects from './pages/admin/AdminProjects';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
               <Route path="/admin" element={<PrivateRoute><AdminLayout /></PrivateRoute>}>
                 <Route index element={<Dashboard />} />
                 <Route path="dashboard" element={<Dashboard />} />
+                <Route path="projects" element={<AdminProjects />} />
               </Route>
             </Routes>
           </main>
