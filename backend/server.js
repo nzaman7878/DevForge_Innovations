@@ -12,6 +12,7 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/projects', require('./routes/projectRoutes'));
+app.use('/api/posts', require('./routes/postRoutes'));
 
 // Basic route
 app.get('/api/health', (req, res) => {
