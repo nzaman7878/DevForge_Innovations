@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Button from '../ui/Button';
+import { useAuth } from '../../context/AuthContext';
 
 export default function Navbar() {
+  const { user, logout } = useAuth();
   const activeStyle = ({ isActive }) =>
     isActive ? "text-primary font-medium transition-colors" : "hover:text-primary transition-colors text-slate-300";
 
@@ -17,9 +19,21 @@ export default function Navbar() {
           <NavLink to="/about" className={activeStyle}>About</NavLink>
           <NavLink to="/blog" className={activeStyle}>Blog</NavLink>
         </nav>
-        <Link to="/contact">
-          <Button variant="primary" size="sm">Get in Touch</Button>
-        </Link>
+        <div className="flex items-center gap-4">
+          {user ? (
+            <>
+              <span className="text-sm text-slate-300 hidden sm:inline-block">Welcome, {user.name}</span>
+              <Button variant="ghost" size="sm" onClick={logout}>Logout</Button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="text-sm text-slate-300 hover:text-white hidden sm:inline-block">Sign In</Link>
+              <Link to="/contact">
+                <Button variant="primary" size="sm">Get in Touch</Button>
+              </Link>
+            </>
+          )}
+        </div>
       </div>
     </header>
   );
