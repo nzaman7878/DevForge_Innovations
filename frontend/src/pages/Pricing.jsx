@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { CheckCircle2, Zap } from 'lucide-react';
 import Button from '../components/ui/Button';
+import SEO from '../components/ui/SEO';
 
 export default function Pricing() {
   const [loading, setLoading] = useState(false);
@@ -50,6 +51,7 @@ export default function Pricing() {
 
   return (
     <div className="pt-24 pb-20">
+      <SEO title="Pricing" description="Simple, transparent pricing. Choose the package that fits your business needs." />
       <div className="container mx-auto px-6 max-w-6xl">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">

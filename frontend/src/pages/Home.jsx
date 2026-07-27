@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Code, Smartphone, Zap } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Card, { CardContent } from '../components/ui/Card';
+import SEO from '../components/ui/SEO';
 
 export default function Home() {
   return (
     <div className="flex flex-col gap-24 py-16">
+      <SEO title="Software Development Agency" />
       {/* Hero Section */}
       <section className="text-center max-w-4xl mx-auto px-4">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-8 border border-primary/20">

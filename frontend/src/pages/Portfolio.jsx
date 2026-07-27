@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card, { CardContent } from '../components/ui/Card';
 import { ExternalLink, GitBranch } from 'lucide-react';
+import SEO from '../components/ui/SEO';
 
 export default function Portfolio() {
   const [projects, setProjects] = useState([]);
@@ -30,6 +31,7 @@ export default function Portfolio() {
 
   return (
     <div className="py-12 px-4">
+      <SEO title="Our Portfolio" description="Explore our recent projects and see how we've helped businesses transform their digital presence." />
       <div className="text-center max-w-3xl mx-auto mb-12">
         <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Work</h1>
         <p className="text-lg text-slate-400">

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Target, Users, Award } from 'lucide-react';
+import SEO from '../components/ui/SEO';
 
 export default function About() {
   return (
     <div className="py-12 px-4">
+      <SEO title="About Us" description="We are a team of passionate engineers, designers, and product strategists." />
       <div className="text-center max-w-3xl mx-auto mb-16">
         <h1 className="text-4xl md:text-5xl font-bold mb-6">About DevForge</h1>
         <p className="text-lg text-slate-400">

@@ -4,6 +4,7 @@ import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import { Calendar, User, ArrowLeft } from 'lucide-react';
 import Button from '../components/ui/Button';
+import SEO from '../components/ui/SEO';
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -39,6 +40,12 @@ export default function BlogPost() {
 
   return (
     <article className="py-12 px-4 max-w-3xl mx-auto w-full">
+      <SEO 
+        title={post.title} 
+        description={post.excerpt} 
+        image={post.coverImage} 
+        type="article" 
+      />
       <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-primary transition-colors mb-8">
         <ArrowLeft size={16} /> Back to all articles
       </Link>

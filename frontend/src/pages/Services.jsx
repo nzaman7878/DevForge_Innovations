@@ -1,6 +1,7 @@
 import React from 'react';
 import { Code, Smartphone, Database, Globe, Cloud, Bot } from 'lucide-react';
 import Card, { CardContent } from '../components/ui/Card';
+import SEO from '../components/ui/SEO';
 
 export default function Services() {
   const services = [
@@ -38,6 +39,7 @@ export default function Services() {
 
   return (
     <div className="py-12 px-4">
+      <SEO title="Our Services" description="End-to-end software development services tailored to your business needs." />
       <div className="text-center max-w-3xl mx-auto mb-16">
         <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Services</h1>
         <p className="text-lg text-slate-400">

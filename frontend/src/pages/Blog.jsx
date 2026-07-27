@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Card, { CardContent } from '../components/ui/Card';
 import { Calendar, User } from 'lucide-react';
+import SEO from '../components/ui/SEO';
 
 export default function Blog() {
   const [posts, setPosts] = useState([]);
@@ -24,6 +25,7 @@ export default function Blog() {
 
   return (
     <div className="py-12 px-4">
+      <SEO title="Insights & Engineering" description="Thoughts on software development, digital strategy, and the future of technology." />
       <div className="text-center max-w-3xl mx-auto mb-16">
         <h1 className="text-4xl md:text-5xl font-bold mb-6">Insights & Engineering</h1>
         <p className="text-lg text-slate-400">

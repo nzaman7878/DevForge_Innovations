@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Send, CheckCircle2 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
+import SEO from '../components/ui/SEO';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -37,6 +38,7 @@ export default function Contact() {
 
   return (
     <div className="pt-24 pb-16">
+      <SEO title="Contact Us" description="Tell us about your project, your goals, and what you're hoping to achieve." />
       <div className="container mx-auto px-6 max-w-4xl">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
