@@ -12,7 +12,7 @@ export default function AdminSidebar() {
     { label: 'Portfolio', to: '/admin/projects', icon: <FolderKanban size={20} /> },
     { label: 'Blog Posts', to: '/admin/posts', icon: <FileText size={20} /> },
     { label: 'Leads', to: '/admin/leads', icon: <Users size={20} /> },
-    { label: 'Settings', to: '/admin/settings', icon: <Settings size={20} /> },
+    { label: 'Settings', to: '/settings', icon: <Settings size={20} /> },
   ];
 
   return (
