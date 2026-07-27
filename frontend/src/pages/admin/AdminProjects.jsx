@@ -8,8 +8,11 @@ import Input from '../../components/ui/Input';
 export default function AdminProjects() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProject, setEditingProject] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -44,6 +47,7 @@ export default function AdminProjects() {
         ...project,
         technologies: project.technologies?.join(', ') || ''
       });
+      setImagePreview(project.imageUrl || null);
     } else {
       setEditingProject(null);
       setFormData({
@@ -55,7 +59,9 @@ export default function AdminProjects() {
         githubLink: '',
         technologies: ''
       });
+      setImagePreview(null);
     }
+    setImageFile(null);
     setIsModalOpen(true);
   };
 
@@ -68,24 +74,58 @@ export default function AdminProjects() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        alert('Please select a valid image file');
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Image must be less than 5MB');
+        return;
+      }
+      setImageFile(file);
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const payload = {
-      ...formData,
-      technologies: formData.technologies.split(',').map(t => t.trim()).filter(t => t)
-    };
-
+    setSubmitting(true);
+    
     try {
+      const payload = new FormData();
+      payload.append('title', formData.title);
+      payload.append('description', formData.description);
+      payload.append('category', formData.category);
+      payload.append('technologies', formData.technologies); // backend parses string
+      if (formData.liveLink) payload.append('liveLink', formData.liveLink);
+      if (formData.githubLink) payload.append('githubLink', formData.githubLink);
+      
+      if (imageFile) {
+        payload.append('image', imageFile);
+      }
+
+      const headers = { 'Content-Type': 'multipart/form-data' };
+
       if (editingProject) {
-        await axios.put(`${import.meta.env.VITE_API_URL}/projects/${editingProject._id}`, payload);
+        await axios.put(`${import.meta.env.VITE_API_URL}/projects/${editingProject._id}`, payload, { headers });
       } else {
-        await axios.post(`${import.meta.env.VITE_API_URL}/projects`, payload);
+        if (!imageFile) {
+          alert('Please select an image for the project');
+          setSubmitting(false);
+          return;
+        }
+        await axios.post(`${import.meta.env.VITE_API_URL}/projects`, payload, { headers });
       }
       fetchProjects();
       handleCloseModal();
     } catch (error) {
       console.error('Error saving project', error);
       alert('Error saving project');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -212,12 +252,28 @@ export default function AdminProjects() {
                 <option value="Other">Other</option>
               </select>
             </div>
-            <Input 
-              label="Image URL" 
-              name="imageUrl" 
-              value={formData.imageUrl} 
-              onChange={handleChange} 
-            />
+            <div className="flex flex-col gap-1.5">
+              <label className="text-sm font-medium text-slate-300">Project Image</label>
+              <div className="border-2 border-dashed border-slate-700 rounded-lg p-4 text-center hover:bg-slate-800/30 transition-colors relative cursor-pointer">
+                <input 
+                  type="file" 
+                  accept="image/*" 
+                  onChange={handleImageChange}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                />
+                {imagePreview ? (
+                  <div className="flex flex-col items-center">
+                    <img src={imagePreview} alt="Preview" className="h-20 object-cover rounded-md mb-2" />
+                    <span className="text-xs text-slate-400">Click or drag to change image</span>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center py-4">
+                    <Plus size={24} className="text-slate-500 mb-2" />
+                    <span className="text-sm text-slate-400">Upload Image (Max 5MB)</span>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
 
           <Input 
@@ -247,8 +303,8 @@ export default function AdminProjects() {
             <Button type="button" variant="ghost" onClick={handleCloseModal}>
               Cancel
             </Button>
-            <Button type="submit">
-              {editingProject ? 'Save Changes' : 'Create Project'}
+            <Button type="submit" disabled={submitting}>
+              {submitting ? 'Saving...' : (editingProject ? 'Save Changes' : 'Create Project')}
             </Button>
           </div>
         </form>
