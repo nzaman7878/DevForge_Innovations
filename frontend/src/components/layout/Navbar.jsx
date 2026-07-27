@@ -16,6 +16,7 @@ export default function Navbar() {
           <NavLink to="/" className={activeStyle}>Home</NavLink>
           <NavLink to="/services" className={activeStyle}>Services</NavLink>
           <NavLink to="/portfolio" className={activeStyle}>Portfolio</NavLink>
+          <NavLink to="/pricing" className={activeStyle}>Pricing</NavLink>
           <NavLink to="/about" className={activeStyle}>About</NavLink>
           <NavLink to="/blog" className={activeStyle}>Blog</NavLink>
         </nav>
