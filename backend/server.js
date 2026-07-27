@@ -13,6 +13,7 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/projects', require('./routes/projectRoutes'));
 app.use('/api/posts', require('./routes/postRoutes'));
+app.use('/api/leads', require('./routes/leadRoutes'));
 
 // Basic route
 app.get('/api/health', (req, res) => {

@@ -20,6 +20,7 @@ import AdminLayout from './components/layout/AdminLayout';
 import Dashboard from './pages/admin/Dashboard';
 import AdminProjects from './pages/admin/AdminProjects';
 import AdminPosts from './pages/admin/AdminPosts';
+import AdminLeads from './pages/admin/AdminLeads';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="projects" element={<AdminProjects />} />
                 <Route path="posts" element={<AdminPosts />} />
+                <Route path="leads" element={<AdminLeads />} />
               </Route>
             </Routes>
           </main>
