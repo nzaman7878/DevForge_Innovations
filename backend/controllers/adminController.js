@@ -4,10 +4,6 @@ const Lead = require('../models/Lead');
 const ClientProject = require('../models/ClientProject');
 
 exports.getStats = async (req, res) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ msg: 'Access denied' });
-  }
-
   try {
     const projectCount = await Project.countDocuments();
     const postCount = await Post.countDocuments();

@@ -30,4 +30,6 @@ const clientProjectSchema = new mongoose.Schema({
   }]
 }, { timestamps: true });
 
+clientProjectSchema.index({ client: 1 });
+
 module.exports = mongoose.model('ClientProject', clientProjectSchema);

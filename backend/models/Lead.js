@@ -33,4 +33,7 @@ const leadSchema = new mongoose.Schema({
   },
 }, { timestamps: true });
 
+leadSchema.index({ status: 1 });
+leadSchema.index({ email: 1 });
+
 module.exports = mongoose.model('Lead', leadSchema);

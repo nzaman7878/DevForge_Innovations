@@ -3,6 +3,8 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const auth = require('../middleware/auth');
 const upload = require('../middleware/upload');
+const { check } = require('express-validator');
+const { validate } = require('../middleware/validate');
 
 // @route   GET api/users/profile
 router.get('/profile', auth, userController.getProfile);
@@ -20,6 +22,15 @@ router.delete('/profile/avatar', auth, userController.removeAvatar);
 router.put('/preferences', auth, userController.updatePreferences);
 
 // @route   PUT api/users/password
-router.put('/password', auth, userController.changePassword);
+router.put(
+  '/password', 
+  auth, 
+  [
+    check('currentPassword', 'Current password is required').not().isEmpty(),
+    check('newPassword', 'Please enter a password with 6 or more characters').isLength({ min: 6 })
+  ],
+  validate,
+  userController.changePassword
+);
 
 module.exports = router;
