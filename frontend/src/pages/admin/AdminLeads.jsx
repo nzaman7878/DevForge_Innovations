@@ -113,7 +113,20 @@ export default function AdminLeads() {
                       </div>
                     )}
                     
-                    <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-800">
+                    <div className="flex flex-wrap gap-4 mt-2">
+                      {lead.projectType && (
+                        <div className="bg-primary/10 border border-primary/20 text-primary px-3 py-1 rounded-full text-xs font-medium">
+                          {lead.projectType}
+                        </div>
+                      )}
+                      {lead.budget && (
+                        <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full text-xs font-medium">
+                          Budget: {lead.budget}
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-800 mt-4">
                       <div className="flex items-center gap-2 mb-2 text-slate-300">
                         <MessageSquare size={16} />
                         <span className="text-sm font-medium">Message</span>
