@@ -22,6 +22,18 @@ const userSchema = new mongoose.Schema({
     enum: ['admin', 'client'],
     default: 'client',
   },
+  avatarUrl: {
+    type: String,
+    default: '',
+  },
+  bio: {
+    type: String,
+    default: '',
+  },
+  company: {
+    type: String,
+    default: '',
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

@@ -17,6 +17,7 @@ const PaymentSuccess = lazy(() => import('./pages/PaymentSuccess'));
 const PaymentCancel = lazy(() => import('./pages/PaymentCancel'));
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
+const Profile = lazy(() => import('./pages/Profile'));
 
 import PrivateRoute from './components/layout/PrivateRoute';
 import AdminLayout from './components/layout/AdminLayout';
@@ -61,6 +62,7 @@ function App() {
                 </Route>
                 
                 <Route path="/client" element={<PrivateRoute role="client"><ClientDashboard /></PrivateRoute>} />
+                <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
               </Routes>
             </Suspense>
           </main>

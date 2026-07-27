@@ -18,6 +18,7 @@ app.use('/api/leads', require('./routes/leadRoutes'));
 app.use('/api/client-projects', require('./routes/clientProjectRoutes'));
 app.use('/api/payments', require('./routes/stripeRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
+app.use('/api/users', require('./routes/userRoutes'));
 
 // Basic route
 app.get('/api/health', (req, res) => {
