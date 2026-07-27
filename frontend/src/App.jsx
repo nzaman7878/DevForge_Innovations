@@ -19,6 +19,7 @@ const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
 const Profile = lazy(() => import('./pages/Profile'));
 const Settings = lazy(() => import('./pages/Settings'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 import PrivateRoute from './components/layout/PrivateRoute';
 import AdminLayout from './components/layout/AdminLayout';
@@ -65,6 +66,8 @@ function App() {
                 <Route path="/client" element={<PrivateRoute role="client"><ClientDashboard /></PrivateRoute>} />
                 <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
                 <Route path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
+                
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
           </main>

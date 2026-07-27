@@ -55,7 +55,7 @@ export default function ClientDashboard() {
             <p className="text-slate-400 mb-6 max-w-md mx-auto">
               It looks like you don't have any active projects assigned to your account yet. Contact our team to get started.
             </p>
-            <Button>Start a New Project</Button>
+            <Button onClick={() => window.location.href='/contact'}>Start a New Project</Button>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 gap-6">

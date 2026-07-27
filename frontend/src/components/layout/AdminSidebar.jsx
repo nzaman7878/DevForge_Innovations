@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, FolderKanban, FileText, Users, Settings, LogOut, Briefcase } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
-export default function AdminSidebar() {
+export default function AdminSidebar({ mobileMenuOpen, setMobileMenuOpen }) {
   const { logout } = useAuth();
 
   const links = [
@@ -16,14 +16,29 @@ export default function AdminSidebar() {
   ];
 
   return (
-    <aside className="w-64 bg-surface-elevated/40 border-r border-slate-800 flex flex-col h-[calc(100vh-4rem)] sticky top-16 hidden md:flex">
-      <div className="p-6">
+    <>
+      {/* Overlay for mobile */}
+      {mobileMenuOpen && (
+        <div 
+          className="md:hidden fixed inset-0 bg-black/60 z-30 backdrop-blur-sm"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+      
+      <aside className={`
+        fixed md:sticky top-16 md:top-0 left-0 h-[calc(100vh-4rem)] md:h-[calc(100vh-4rem)] 
+        w-64 bg-slate-900 md:bg-surface-elevated/40 border-r border-slate-800 flex flex-col z-40
+        transition-transform duration-300 ease-in-out
+        ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+      `}>
+        <div className="p-6">
         <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Admin Menu</h2>
         <nav className="flex flex-col gap-2">
           {links.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
+              onClick={() => setMobileMenuOpen && setMobileMenuOpen(false)}
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors font-medium text-sm ${
                   isActive
@@ -49,5 +64,6 @@ export default function AdminSidebar() {
         </button>
       </div>
     </aside>
+    </>
   );
 }
