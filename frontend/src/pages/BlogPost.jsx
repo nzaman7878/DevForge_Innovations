@@ -74,7 +74,7 @@ export default function BlogPost() {
 
       {post.coverImage && (
         <div className="w-full h-64 md:h-96 mb-12 rounded-2xl overflow-hidden border border-slate-800">
-          <img src={post.coverImage} alt={post.title} className="w-full h-full object-cover" />
+          <img src={post.coverImage} alt={post.title} loading="lazy" className="w-full h-full object-cover" />
         </div>
       )}
 

@@ -70,6 +70,7 @@ export default function Portfolio() {
                 <img 
                   src={project.imageUrl || 'https://via.placeholder.com/600x400/1e293b/dae2fd?text=Project+Preview'} 
                   alt={project.title}
+                  loading="lazy"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 right-4 bg-black/60 backdrop-blur text-xs font-semibold px-3 py-1 rounded-full border border-slate-700 text-white">

@@ -1,31 +1,32 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 
-import Home from './pages/Home';
-import Services from './pages/Services';
-import Portfolio from './pages/Portfolio';
-import About from './pages/About';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import Contact from './pages/Contact';
-import Pricing from './pages/Pricing';
-import PaymentSuccess from './pages/PaymentSuccess';
-import PaymentCancel from './pages/PaymentCancel';
-import Login from './pages/Login';
-import Register from './pages/Register';
+const Home = lazy(() => import('./pages/Home'));
+const Services = lazy(() => import('./pages/Services'));
+const Portfolio = lazy(() => import('./pages/Portfolio'));
+const About = lazy(() => import('./pages/About'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Pricing = lazy(() => import('./pages/Pricing'));
+const PaymentSuccess = lazy(() => import('./pages/PaymentSuccess'));
+const PaymentCancel = lazy(() => import('./pages/PaymentCancel'));
+const Login = lazy(() => import('./pages/Login'));
+const Register = lazy(() => import('./pages/Register'));
 
 import PrivateRoute from './components/layout/PrivateRoute';
 import AdminLayout from './components/layout/AdminLayout';
-import Dashboard from './pages/admin/Dashboard';
-import AdminProjects from './pages/admin/AdminProjects';
-import AdminPosts from './pages/admin/AdminPosts';
-import AdminLeads from './pages/admin/AdminLeads';
-import AdminClientProjects from './pages/admin/AdminClientProjects';
-import ClientDashboard from './pages/client/ClientDashboard';
+
+const Dashboard = lazy(() => import('./pages/admin/Dashboard'));
+const AdminProjects = lazy(() => import('./pages/admin/AdminProjects'));
+const AdminPosts = lazy(() => import('./pages/admin/AdminPosts'));
+const AdminLeads = lazy(() => import('./pages/admin/AdminLeads'));
+const AdminClientProjects = lazy(() => import('./pages/admin/AdminClientProjects'));
+const ClientDashboard = lazy(() => import('./pages/client/ClientDashboard'));
 
 function App() {
   return (
@@ -35,31 +36,33 @@ function App() {
           <Navbar />
 
           <main className="flex-1 max-w-7xl mx-auto w-full">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/payment-success" element={<PaymentSuccess />} />
-              <Route path="/payment-cancel" element={<PaymentCancel />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              
-              <Route path="/admin" element={<PrivateRoute><AdminLayout /></PrivateRoute>}>
-                <Route index element={<Dashboard />} />
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="projects" element={<AdminProjects />} />
-                <Route path="client-projects" element={<AdminClientProjects />} />
-                <Route path="posts" element={<AdminPosts />} />
-                <Route path="leads" element={<AdminLeads />} />
-              </Route>
-              
-              <Route path="/client" element={<PrivateRoute role="client"><ClientDashboard /></PrivateRoute>} />
-            </Routes>
+            <Suspense fallback={<div className="flex-1 flex items-center justify-center text-slate-400 py-24">Loading route...</div>}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/portfolio" element={<Portfolio />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/pricing" element={<Pricing />} />
+                <Route path="/payment-success" element={<PaymentSuccess />} />
+                <Route path="/payment-cancel" element={<PaymentCancel />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                
+                <Route path="/admin" element={<PrivateRoute><AdminLayout /></PrivateRoute>}>
+                  <Route index element={<Dashboard />} />
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="projects" element={<AdminProjects />} />
+                  <Route path="client-projects" element={<AdminClientProjects />} />
+                  <Route path="posts" element={<AdminPosts />} />
+                  <Route path="leads" element={<AdminLeads />} />
+                </Route>
+                
+                <Route path="/client" element={<PrivateRoute role="client"><ClientDashboard /></PrivateRoute>} />
+              </Routes>
+            </Suspense>
           </main>
           
           <Footer />
