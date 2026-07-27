@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Briefcase, Clock, CheckCircle, FileText, ArrowRight } from 'lucide-react';
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import Button from '../../ui/Button';
 
 export default function ClientDashboard() {

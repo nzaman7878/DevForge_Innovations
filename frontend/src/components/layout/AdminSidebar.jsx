@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, FolderKanban, FileText, Users, Settings, LogOut, Briefcase } from 'lucide-react';
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
 export default function AdminSidebar() {
   const { logout } = useAuth();
