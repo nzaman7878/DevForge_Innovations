@@ -24,7 +24,7 @@ export default function AdminPosts() {
 
   const fetchPosts = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/posts');
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`);
       setPosts(res.data);
     } catch (error) {
       console.error('Error fetching posts', error);
@@ -85,9 +85,9 @@ export default function AdminPosts() {
 
     try {
       if (editingPost) {
-        await axios.put(`http://localhost:5000/api/posts/${editingPost._id}`, payload);
+        await axios.put(`${import.meta.env.VITE_API_URL}/posts/${editingPost._id}`, payload);
       } else {
-        await axios.post('http://localhost:5000/api/posts', payload);
+        await axios.post(`${import.meta.env.VITE_API_URL}/posts`, payload);
       }
       fetchPosts();
       handleCloseModal();
@@ -100,7 +100,7 @@ export default function AdminPosts() {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this post?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/posts/${id}`);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/posts/${id}`);
         fetchPosts();
       } catch (error) {
         console.error('Error deleting post', error);

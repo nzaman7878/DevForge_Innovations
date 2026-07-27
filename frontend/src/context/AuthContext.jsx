@@ -14,7 +14,7 @@ export function AuthProvider({ children }) {
 
   // Configure axios defaults
   const api = axios.create({
-    baseURL: 'http://localhost:5000/api', // Adjust if needed
+    baseURL: `${import.meta.env.VITE_API_URL}`, // Adjust if needed
   });
 
   if (token) {

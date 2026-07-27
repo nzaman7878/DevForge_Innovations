@@ -24,7 +24,7 @@ export default function AdminProjects() {
 
   const fetchProjects = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/projects');
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/projects`);
       setProjects(res.data);
     } catch (error) {
       console.error('Error fetching projects', error);
@@ -77,9 +77,9 @@ export default function AdminProjects() {
 
     try {
       if (editingProject) {
-        await axios.put(`http://localhost:5000/api/projects/${editingProject._id}`, payload);
+        await axios.put(`${import.meta.env.VITE_API_URL}/projects/${editingProject._id}`, payload);
       } else {
-        await axios.post('http://localhost:5000/api/projects', payload);
+        await axios.post(`${import.meta.env.VITE_API_URL}/projects`, payload);
       }
       fetchProjects();
       handleCloseModal();
@@ -92,7 +92,7 @@ export default function AdminProjects() {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this project?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/projects/${id}`);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/projects/${id}`);
         fetchProjects();
       } catch (error) {
         console.error('Error deleting project', error);

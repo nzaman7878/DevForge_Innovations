@@ -9,7 +9,7 @@ export default function AdminLeads() {
 
   const fetchLeads = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/leads');
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/leads`);
       setLeads(res.data);
     } catch (error) {
       console.error('Error fetching leads', error);
@@ -24,7 +24,7 @@ export default function AdminLeads() {
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axios.put(`http://localhost:5000/api/leads/${id}/status`, { status: newStatus });
+      await axios.put(`${import.meta.env.VITE_API_URL}/leads/${id}/status`, { status: newStatus });
       fetchLeads();
     } catch (error) {
       console.error('Error updating status', error);
@@ -34,7 +34,7 @@ export default function AdminLeads() {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this lead?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/leads/${id}`);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/leads/${id}`);
         fetchLeads();
       } catch (error) {
         console.error('Error deleting lead', error);

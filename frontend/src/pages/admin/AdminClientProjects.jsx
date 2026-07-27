@@ -23,8 +23,8 @@ export default function AdminClientProjects() {
   const fetchData = async () => {
     try {
       const [projRes, clientRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/client-projects'),
-        axios.get('http://localhost:5000/api/client-projects/clients')
+        axios.get(`${import.meta.env.VITE_API_URL}/client-projects`),
+        axios.get(`${import.meta.env.VITE_API_URL}/client-projects/clients`)
       ]);
       setProjects(projRes.data);
       setClients(clientRes.data);
@@ -75,9 +75,9 @@ export default function AdminClientProjects() {
     e.preventDefault();
     try {
       if (editingProject) {
-        await axios.put(`http://localhost:5000/api/client-projects/${editingProject._id}`, formData);
+        await axios.put(`${import.meta.env.VITE_API_URL}/client-projects/${editingProject._id}`, formData);
       } else {
-        await axios.post('http://localhost:5000/api/client-projects', formData);
+        await axios.post(`${import.meta.env.VITE_API_URL}/client-projects`, formData);
       }
       fetchData();
       handleCloseModal();
@@ -90,7 +90,7 @@ export default function AdminClientProjects() {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this client project?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/client-projects/${id}`);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/client-projects/${id}`);
         fetchData();
       } catch (error) {
         console.error('Error deleting project', error);

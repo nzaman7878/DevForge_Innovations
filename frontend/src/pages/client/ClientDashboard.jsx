@@ -13,7 +13,7 @@ export default function ClientDashboard() {
     const fetchMyProjects = async () => {
       try {
         // AuthContext automatically attaches the token
-        const res = await axios.get('http://localhost:5000/api/client-projects/mine');
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/client-projects/mine`);
         setProjects(res.data);
       } catch (error) {
         console.error('Error fetching client projects', error);

@@ -11,7 +11,7 @@ module.exports = function (req, res, next) {
 
   try {
     // Verify token (Bearer token handling)
-    const decoded = jwt.verify(token.replace('Bearer ', ''), process.env.JWT_SECRET || 'secret');
+    const decoded = jwt.verify(token.replace('Bearer ', ''), process.env.JWT_SECRET);
     req.user = decoded.user;
     next();
   } catch (err) {

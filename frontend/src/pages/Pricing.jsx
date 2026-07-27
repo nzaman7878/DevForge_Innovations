@@ -10,7 +10,7 @@ export default function Pricing() {
   const handleCheckout = async (packageId) => {
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/payments/create-checkout-session', { packageId });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/payments/create-checkout-session`, { packageId });
       if (res.data.url) {
         window.location.href = res.data.url; // Redirect to Stripe Checkout
       }
