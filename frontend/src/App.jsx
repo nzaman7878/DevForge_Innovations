@@ -21,6 +21,8 @@ import Dashboard from './pages/admin/Dashboard';
 import AdminProjects from './pages/admin/AdminProjects';
 import AdminPosts from './pages/admin/AdminPosts';
 import AdminLeads from './pages/admin/AdminLeads';
+import AdminClientProjects from './pages/admin/AdminClientProjects';
+import ClientDashboard from './pages/client/ClientDashboard';
 
 function App() {
   return (
@@ -45,9 +47,12 @@ function App() {
                 <Route index element={<Dashboard />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="projects" element={<AdminProjects />} />
+                <Route path="client-projects" element={<AdminClientProjects />} />
                 <Route path="posts" element={<AdminPosts />} />
                 <Route path="leads" element={<AdminLeads />} />
               </Route>
+              
+              <Route path="/client" element={<PrivateRoute role="client"><ClientDashboard /></PrivateRoute>} />
             </Routes>
           </main>
           

@@ -1,17 +1,18 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, FileText, Briefcase, Users, Settings, LogOut } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { LayoutDashboard, FolderKanban, FileText, Users, Settings, LogOut, Briefcase } from 'lucide-react';
+import { useAuth } from '../../../context/AuthContext';
 
 export default function AdminSidebar() {
   const { logout } = useAuth();
 
   const links = [
-    { to: '/admin/dashboard', icon: <LayoutDashboard size={20} />, label: 'Dashboard' },
-    { to: '/admin/projects', icon: <Briefcase size={20} />, label: 'Projects' },
-    { to: '/admin/posts', icon: <FileText size={20} />, label: 'Blog Posts' },
-    { to: '/admin/leads', icon: <Users size={20} />, label: 'Leads' },
-    { to: '/admin/settings', icon: <Settings size={20} />, label: 'Settings' },
+    { label: 'Dashboard', to: '/admin', icon: <LayoutDashboard size={20} /> },
+    { label: 'Client Projects', to: '/admin/client-projects', icon: <Briefcase size={20} /> },
+    { label: 'Portfolio', to: '/admin/projects', icon: <FolderKanban size={20} /> },
+    { label: 'Blog Posts', to: '/admin/posts', icon: <FileText size={20} /> },
+    { label: 'Leads', to: '/admin/leads', icon: <Users size={20} /> },
+    { label: 'Settings', to: '/admin/settings', icon: <Settings size={20} /> },
   ];
 
   return (
