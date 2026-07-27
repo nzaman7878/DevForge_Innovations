@@ -103,7 +103,7 @@ export default function Navbar() {
                   </Link>
 
                   <Link 
-                    to="/profile"
+                    to="/settings"
                     onClick={() => setDropdownOpen(false)}
                     className="flex items-center gap-2 px-4 py-2 text-sm text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors"
                     role="menuitem"

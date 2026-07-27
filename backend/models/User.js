@@ -34,6 +34,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+  preferences: {
+    emailNotifications: { type: Boolean, default: true },
+    marketingEmails: { type: Boolean, default: false },
+    publicProfile: { type: Boolean, default: true }
+  }
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

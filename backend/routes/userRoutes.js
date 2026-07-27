@@ -16,4 +16,10 @@ router.post('/profile/avatar', auth, upload.single('avatar'), userController.upd
 // @route   DELETE api/users/profile/avatar
 router.delete('/profile/avatar', auth, userController.removeAvatar);
 
+// @route   PUT api/users/preferences
+router.put('/preferences', auth, userController.updatePreferences);
+
+// @route   PUT api/users/password
+router.put('/password', auth, userController.changePassword);
+
 module.exports = router;
