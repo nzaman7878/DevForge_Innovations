@@ -9,8 +9,14 @@ const leadSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    trim: true,
     lowercase: true,
+    trim: true,
+  },
+  projectType: {
+    type: String,
+  },
+  budget: {
+    type: String,
   },
   company: {
     type: String,

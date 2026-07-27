@@ -17,6 +17,7 @@ exports.getProjects = async (req, res) => {
 exports.createProject = async (req, res) => {
   try {
     let imageUrl = '';
+    let imageId = '';
     
     if (req.file) {
       const uploadResponse = await imagekit.upload({
@@ -25,6 +26,7 @@ exports.createProject = async (req, res) => {
         folder: '/devforge/projects'
       });
       imageUrl = uploadResponse.url;
+      imageId = uploadResponse.fileId;
     }
 
     // Since technologies is sent as a string when using FormData (or array if JSON), handle it:
@@ -36,7 +38,8 @@ exports.createProject = async (req, res) => {
     const newProject = new Project({
       ...req.body,
       technologies,
-      imageUrl: imageUrl || req.body.imageUrl // fallback if someone still sends string
+      imageUrl: imageUrl || req.body.imageUrl,
+      imageId
     });
 
     const project = await newProject.save();
@@ -50,14 +53,21 @@ exports.createProject = async (req, res) => {
 exports.updateProject = async (req, res) => {
   try {
     let imageUrl = req.body.imageUrl;
+    let imageId = req.body.imageId;
 
     if (req.file) {
+      const oldProject = await Project.findById(req.params.id);
+      if (oldProject && oldProject.imageId) {
+        try { await imagekit.deleteFile(oldProject.imageId); } catch (e) { console.error('ImageKit delete error:', e); }
+      }
+
       const uploadResponse = await imagekit.upload({
         file: req.file.buffer,
         fileName: `project_${Date.now()}`,
         folder: '/devforge/projects'
       });
       imageUrl = uploadResponse.url;
+      imageId = uploadResponse.fileId;
     }
 
     let technologies = req.body.technologies;
@@ -73,9 +83,11 @@ exports.updateProject = async (req, res) => {
     // Only update imageUrl if we got a new file or an explicitly passed string
     if (imageUrl) {
       updateData.imageUrl = imageUrl;
+      if (imageId) updateData.imageId = imageId;
     } else {
       // If no file and no string, do not overwrite existing imageUrl with undefined
       delete updateData.imageUrl;
+      delete updateData.imageId;
     }
 
     const project = await Project.findByIdAndUpdate(req.params.id, updateData, { new: true });
@@ -91,6 +103,11 @@ exports.deleteProject = async (req, res) => {
   try {
     const project = await Project.findByIdAndDelete(req.params.id);
     if (!project) return res.status(404).json({ msg: 'Project not found' });
+    
+    if (project.imageId) {
+      try { await imagekit.deleteFile(project.imageId); } catch (e) { console.error('ImageKit delete error:', e); }
+    }
+    
     res.json({ msg: 'Project removed' });
   } catch (err) {
     console.error(err.message);

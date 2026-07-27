@@ -8,7 +8,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || 'fake-key' })
 // @access  Public
 exports.createLead = async (req, res) => {
   try {
-    const { name, email, company, message } = req.body;
+    const { name, email, company, message, projectType, budget } = req.body;
 
     let aiScore = null;
 
@@ -24,6 +24,8 @@ exports.createLead = async (req, res) => {
           Lead Name: ${name}
           Company: ${company || 'N/A'}
           Email: ${email}
+          Project Type: ${projectType || 'N/A'}
+          Budget: ${budget || 'N/A'}
           Message: ${message}
           
           Only return a single integer representing the score (0-100). Do not include any other text.
@@ -49,6 +51,8 @@ exports.createLead = async (req, res) => {
       name,
       email,
       company,
+      projectType,
+      budget,
       message,
       aiScore
     });

@@ -19,6 +19,9 @@ const projectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  imageId: {
+    type: String,
+  },
   clientName: {
     type: String,
     trim: true,

@@ -50,6 +50,10 @@ exports.updateAvatar = async (req, res) => {
       return res.status(404).json({ msg: 'User not found' });
     }
 
+    if (user.avatarId) {
+      try { await imagekit.deleteFile(user.avatarId); } catch (e) { console.error('ImageKit delete error:', e); }
+    }
+
     // Upload to ImageKit
     const uploadResponse = await imagekit.upload({
       file: req.file.buffer, // memory buffer from multer
@@ -58,6 +62,7 @@ exports.updateAvatar = async (req, res) => {
     });
 
     user.avatarUrl = uploadResponse.url;
+    user.avatarId = uploadResponse.fileId;
     await user.save();
 
     res.json({ avatarUrl: user.avatarUrl, msg: 'Avatar updated successfully' });
@@ -74,7 +79,12 @@ exports.removeAvatar = async (req, res) => {
       return res.status(404).json({ msg: 'User not found' });
     }
 
+    if (user.avatarId) {
+      try { await imagekit.deleteFile(user.avatarId); } catch (e) { console.error('ImageKit delete error:', e); }
+    }
+
     user.avatarUrl = '';
+    user.avatarId = '';
     await user.save();
 
     res.json({ msg: 'Avatar removed successfully' });

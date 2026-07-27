@@ -10,6 +10,8 @@ export default function Contact() {
     name: '',
     email: '',
     company: '',
+    projectType: '',
+    budget: '',
     message: ''
   });
   const [loading, setLoading] = useState(false);
@@ -24,13 +26,22 @@ export default function Contact() {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    
+    // Email regex validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError('Please enter a valid email address.');
+      setLoading(false);
+      return;
+    }
+
     try {
       await axios.post(`${import.meta.env.VITE_API_URL}/leads`, formData);
       setSuccess(true);
-      setFormData({ name: '', email: '', company: '', message: '' });
+      setFormData({ name: '', email: '', company: '', projectType: '', budget: '', message: '' });
     } catch (err) {
       console.error(err);
-      setError('Something went wrong. Please try again later.');
+      setError(err.response?.data?.msg || 'Something went wrong. Please try again later.');
     } finally {
       setLoading(false);
     }
@@ -96,6 +107,41 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="Acme Corp"
               />
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium text-slate-300">Project Type *</label>
+                  <select
+                    name="projectType"
+                    value={formData.projectType}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+                  >
+                    <option value="" disabled>Select project type</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Mobile App">Mobile App</option>
+                    <option value="SaaS Platform">SaaS Platform</option>
+                    <option value="AI Integration">AI Integration</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium text-slate-300">Budget Range</label>
+                  <select
+                    name="budget"
+                    value={formData.budget}
+                    onChange={handleChange}
+                    className="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+                  >
+                    <option value="" disabled>Select your budget</option>
+                    <option value="<$10k">Less than $10,000</option>
+                    <option value="$10k-$25k">$10,000 - $25,000</option>
+                    <option value="$25k-$50k">$25,000 - $50,000</option>
+                    <option value="$50k+">$50,000+</option>
+                  </select>
+                </div>
+              </div>
 
               <div className="flex flex-col gap-2">
                 <label className="text-sm font-medium text-slate-300">Project Details</label>
