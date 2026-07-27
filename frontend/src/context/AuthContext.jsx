@@ -12,16 +12,15 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [loading, setLoading] = useState(true);
 
-  // Configure axios defaults
-  axios.defaults.baseURL = import.meta.env.VITE_API_URL; // Adjust if needed
-
-  if (token) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  } else {
-    delete axios.defaults.headers.common['Authorization'];
-  }
-
   useEffect(() => {
+    // Configure axios defaults when token changes
+    axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    } else {
+      delete axios.defaults.headers.common['Authorization'];
+    }
+
     const loadUser = async () => {
       if (!token) {
         setLoading(false);

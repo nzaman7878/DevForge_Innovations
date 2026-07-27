@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const imagekit = require('../config/imagekit');
+const bcrypt = require('bcryptjs');
 
 exports.getProfile = async (req, res) => {
   try {
@@ -109,8 +110,6 @@ exports.updatePreferences = async (req, res) => {
     res.status(500).send('Server error');
   }
 };
-
-const bcrypt = require('bcryptjs');
 
 exports.changePassword = async (req, res) => {
   const { currentPassword, newPassword } = req.body;

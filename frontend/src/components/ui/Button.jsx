@@ -13,6 +13,7 @@ export default function Button({
     primary: 'bg-primary hover:bg-primary-hover text-white shadow-lg shadow-primary/20',
     secondary: 'bg-surface-elevated hover:bg-slate-700 text-white border border-slate-700',
     ghost: 'hover:bg-surface-elevated text-on-surface-muted hover:text-white',
+    outline: 'border border-slate-600 text-slate-300 hover:border-primary hover:text-primary bg-transparent',
   };
   
   const sizes = {

@@ -66,13 +66,19 @@ export default function Portfolio() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map(project => (
             <Card key={project._id} hover className="flex flex-col h-full bg-surface-elevated/20">
-              <div className="h-48 w-full bg-slate-800 relative overflow-hidden">
-                <img 
-                  src={project.imageUrl || 'https://via.placeholder.com/600x400/1e293b/dae2fd?text=Project+Preview'} 
-                  alt={project.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                />
+              <div className="h-48 w-full bg-slate-800 relative overflow-hidden flex items-center justify-center group">
+                {project.imageUrl ? (
+                  <img 
+                    src={project.imageUrl} 
+                    alt={project.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center justify-center text-slate-500 w-full h-full bg-slate-800 group-hover:scale-105 transition-transform duration-500">
+                    <span className="text-xl font-bold tracking-wider opacity-20">DEVFORGE</span>
+                  </div>
+                )}
                 <div className="absolute top-4 right-4 bg-black/60 backdrop-blur text-xs font-semibold px-3 py-1 rounded-full border border-slate-700 text-white">
                   {project.category}
                 </div>

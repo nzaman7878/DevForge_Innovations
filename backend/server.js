@@ -36,7 +36,8 @@ app.use('/api/users', apiLimiter, require('./routes/userRoutes'));
 
 // Basic route
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'DevForge Innovations API is running' });
+  const dbState = mongoose.connection.readyState === 1 ? 'connected' : 'disconnected';
+  res.json({ status: 'ok', message: 'DevForge Innovations API is running', database: dbState, timestamp: new Date().toISOString() });
 });
 
 // Database connection
