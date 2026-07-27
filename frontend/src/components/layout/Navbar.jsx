@@ -49,6 +49,7 @@ export default function Navbar() {
           <NavLink to="/about" className={activeStyle}>About</NavLink>
           <NavLink to="/blog" className={activeStyle}>Blog</NavLink>
         </nav>
+        <div className="flex items-center gap-4">
           {user ? (
             <div className="relative" ref={dropdownRef} onKeyDown={handleKeyDown}>
               <button
