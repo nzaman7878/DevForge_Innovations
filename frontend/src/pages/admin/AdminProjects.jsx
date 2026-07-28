@@ -160,12 +160,13 @@ export default function AdminProjects() {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-800/50 text-slate-400">
+              <caption className="sr-only">List of all projects</caption>
+              <thead className="bg-slate-800/50 text-slate-400 uppercase text-xs tracking-wider">
                 <tr>
-                  <th className="px-6 py-4 font-medium">Title</th>
-                  <th className="px-6 py-4 font-medium">Category</th>
-                  <th className="px-6 py-4 font-medium hidden md:table-cell">Technologies</th>
-                  <th className="px-6 py-4 font-medium text-right">Actions</th>
+                  <th scope="col" className="px-6 py-4 font-medium">Title</th>
+                  <th scope="col" className="px-6 py-4 font-medium">Category</th>
+                  <th scope="col" className="px-6 py-4 font-medium hidden md:table-cell">Technologies</th>
+                  <th scope="col" className="px-6 py-4 font-medium text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800/60">
@@ -253,13 +254,15 @@ export default function AdminProjects() {
               </select>
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm font-medium text-slate-300">Project Image</label>
+              <label htmlFor="project-image-upload" className="text-sm font-medium text-slate-300">Project Image</label>
               <div className="border-2 border-dashed border-slate-700 rounded-lg p-4 text-center hover:bg-slate-800/30 transition-colors relative cursor-pointer">
                 <input 
+                  id="project-image-upload"
                   type="file" 
                   accept="image/*" 
                   onChange={handleImageChange}
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  aria-label="Upload project image"
                 />
                 {imagePreview ? (
                   <div className="flex flex-col items-center">

@@ -156,22 +156,23 @@ export default function Profile() {
                 )}
               </div>
               
-              <button 
-                onClick={() => fileInputRef.current?.click()}
-                disabled={uploading}
-                className="absolute bottom-0 right-0 p-2 bg-primary text-white rounded-full shadow-lg hover:bg-primary-hover transition-colors disabled:opacity-50"
+              <label
+                htmlFor="avatar-upload"
+                className={`absolute bottom-0 right-0 p-2 bg-primary text-white rounded-full shadow-lg hover:bg-primary-hover transition-colors cursor-pointer ${uploading ? 'opacity-50 pointer-events-none' : ''}`}
                 title="Upload Picture"
               >
                 <Camera size={18} />
-              </button>
+                <span className="sr-only">Upload avatar picture</span>
+              </label>
             </div>
             
             <input 
+              id="avatar-upload"
               type="file" 
               ref={fileInputRef} 
               onChange={handleAvatarChange} 
               accept="image/*" 
-              className="hidden" 
+              className="sr-only" 
             />
 
             <div className="flex flex-col gap-2 w-full">

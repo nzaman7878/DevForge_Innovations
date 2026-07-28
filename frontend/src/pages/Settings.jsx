@@ -250,14 +250,19 @@ function PrivacyTab({ user, updateUser }) {
 
 // Simple toggle switch component
 function ToggleRow({ title, description, checked, onChange }) {
+  const titleId = title.replace(/\s+/g, '-').toLowerCase() + '-label';
+  
   return (
     <div className="flex items-center justify-between">
       <div>
-        <p className="font-medium text-white">{title}</p>
+        <p className="font-medium text-white" id={titleId}>{title}</p>
         <p className="text-sm text-slate-400">{description}</p>
       </div>
       <button 
         type="button"
+        role="switch"
+        aria-checked={checked}
+        aria-labelledby={titleId}
         onClick={onChange}
         className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-900 ${checked ? 'bg-primary' : 'bg-slate-700'}`}
       >

@@ -128,12 +128,13 @@ export default function AdminPosts() {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-800/50 text-slate-400">
+              <caption className="sr-only">List of all blog posts</caption>
+              <thead className="bg-slate-800/50 text-slate-400 uppercase text-xs tracking-wider">
                 <tr>
-                  <th className="px-6 py-4 font-medium">Title</th>
-                  <th className="px-6 py-4 font-medium">Status</th>
-                  <th className="px-6 py-4 font-medium hidden md:table-cell">Date</th>
-                  <th className="px-6 py-4 font-medium text-right">Actions</th>
+                  <th scope="col" className="px-6 py-4 font-medium">Title</th>
+                  <th scope="col" className="px-6 py-4 font-medium">Status</th>
+                  <th scope="col" className="px-6 py-4 font-medium hidden md:table-cell">Date</th>
+                  <th scope="col" className="px-6 py-4 font-medium text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800/60">

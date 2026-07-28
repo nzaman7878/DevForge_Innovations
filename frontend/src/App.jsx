@@ -38,7 +38,7 @@ function App() {
         <div className="min-h-screen flex flex-col font-sans">
           <Navbar />
 
-          <main className="flex-1 max-w-7xl mx-auto w-full">
+          <main id="main-content" className="flex-1 max-w-7xl mx-auto w-full">
             <Suspense fallback={<div className="flex-1 flex items-center justify-center text-slate-400 py-24">Loading route...</div>}>
               <Routes>
                 <Route path="/" element={<Home />} />

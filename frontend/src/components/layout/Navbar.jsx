@@ -38,6 +38,10 @@ export default function Navbar() {
     isActive ? "text-primary font-medium transition-colors" : "hover:text-primary transition-colors text-slate-300";
 
   return (
+    <>
+    <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white p-2 rounded z-[100]">
+      Skip to main content
+    </a>
     <header className="border-b border-slate-800 bg-surface/80 backdrop-blur-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="text-xl font-bold text-primary tracking-tight">DevForge</Link>
@@ -136,5 +140,6 @@ export default function Navbar() {
         </div>
       </div>
     </header>
+    </>
   );
 }

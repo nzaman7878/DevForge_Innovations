@@ -45,6 +45,7 @@ export default function Portfolio() {
           <button
             key={cat}
             onClick={() => setFilter(cat)}
+            aria-pressed={filter === cat}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
               filter === cat 
                 ? 'bg-primary text-white shadow-lg shadow-primary/20' 

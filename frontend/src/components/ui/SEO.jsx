@@ -13,6 +13,7 @@ export default function SEO({ title, description, type = 'website', url, image }
       {/* Standard metadata tags */}
       <title>{fullTitle}</title>
       <meta name="description" content={description || defaultDescription} />
+      <link rel="canonical" href={url || window.location.href} />
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
