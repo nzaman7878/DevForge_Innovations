@@ -1,6 +1,7 @@
 import React from 'react';
 import { Code, Smartphone, Database, Globe, Cloud, Bot } from 'lucide-react';
-import Card, { CardContent } from '../components/ui/Card';
+import Card, { CardHeader, CardContent } from '../components/ui/Card';
+import SectionHeader from '../components/ui/SectionHeader';
 import SEO from '../components/ui/SEO';
 
 export default function Services() {
@@ -40,12 +41,12 @@ export default function Services() {
   return (
     <div className="py-12 px-4">
       <SEO title="Our Services" description="End-to-end software development services tailored to your business needs." />
-      <div className="text-center max-w-3xl mx-auto mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Services</h1>
-        <p className="text-lg text-slate-400">
-          End-to-end software development services tailored to your business needs. We handle everything from concept to deployment.
-        </p>
-      </div>
+      <SectionHeader 
+        title="Our Services" 
+        subtitle="End-to-end software development services tailored to your business needs. We handle everything from concept to deployment."
+        badge="Expertise"
+        isMainHeading={true}
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((service, idx) => (

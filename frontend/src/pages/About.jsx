@@ -1,17 +1,18 @@
 import React from 'react';
 import { Target, Users, Award } from 'lucide-react';
 import SEO from '../components/ui/SEO';
+import SectionHeader from '../components/ui/SectionHeader';
 
 export default function About() {
   return (
     <div className="py-12 px-4">
       <SEO title="About Us" description="We are a team of passionate engineers, designers, and product strategists." />
-      <div className="text-center max-w-3xl mx-auto mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">About DevForge</h1>
-        <p className="text-lg text-slate-400">
-          We are a team of passionate engineers, designers, and product strategists dedicated to crafting exceptional digital experiences.
-        </p>
-      </div>
+      <SectionHeader 
+        title="About DevForge" 
+        subtitle="We are a team of passionate engineers, designers, and product strategists dedicated to crafting exceptional digital experiences."
+        badge="Our Story"
+        isMainHeading={true}
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
         <div>

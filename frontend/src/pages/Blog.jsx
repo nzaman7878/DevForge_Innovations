@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Card, { CardContent } from '../components/ui/Card';
 import { CardSkeleton, PageSkeleton } from '../components/ui/Skeleton';
+import SectionHeader from '../components/ui/SectionHeader';
 import { Calendar, User } from 'lucide-react';
 import SEO from '../components/ui/SEO';
 
@@ -27,12 +28,12 @@ export default function Blog() {
   return (
     <div className="py-12 px-4">
       <SEO title="Insights & Engineering" description="Thoughts on software development, digital strategy, and the future of technology." />
-      <div className="text-center max-w-3xl mx-auto mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">Insights & Engineering</h1>
-        <p className="text-lg text-slate-400">
-          Thoughts on software development, digital strategy, and the future of technology from the DevForge team.
-        </p>
-      </div>
+      <SectionHeader 
+        title="Insights & Engineering" 
+        subtitle="Thoughts on software development, digital strategy, and the future of technology from the DevForge team."
+        badge="Journal"
+        isMainHeading={true}
+      />
 
       {loading ? (
         <PageSkeleton className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">

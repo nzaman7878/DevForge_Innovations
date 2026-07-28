@@ -7,7 +7,7 @@ export default function Button({
   className = '', 
   ...props 
 }) {
-  const baseStyles = 'inline-flex items-center justify-center rounded-lg font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseStyles = 'inline-flex items-center justify-center rounded-lg font-medium transition-all duration-150 active:scale-[0.97] disabled:active:scale-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed';
   
   const variants = {
     primary: 'bg-primary hover:bg-primary-hover text-white shadow-lg shadow-primary/20',

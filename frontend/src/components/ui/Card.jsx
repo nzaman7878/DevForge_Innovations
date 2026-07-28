@@ -1,11 +1,11 @@
 import React from 'react';
 
 export default function Card({ children, className = '', hover = false, ...props }) {
-  const hoverStyles = hover ? 'hover:-translate-y-1 hover:border-slate-600 transition-all duration-300' : '';
+  const hoverStyles = hover ? 'hover:-translate-y-1 hover:border-slate-700 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 ease-out' : '';
   
   return (
     <div 
-      className={`bg-surface border border-slate-800 rounded-2xl overflow-hidden ${hoverStyles} ${className}`}
+      className={`bg-surface border border-slate-800/50 rounded-2xl overflow-hidden ${hoverStyles} ${className}`}
       {...props}
     >
       {children}

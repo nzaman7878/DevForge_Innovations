@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Code, Smartphone, Zap, Star, Users, CheckCircle, Globe } from 'lucide-react';
+import { ArrowRight, Code, Database, Globe, Zap, CheckCircle2, ChevronRight, BarChart3, Users, Layout, Star, Smartphone, CheckCircle } from 'lucide-react';
+import SectionHeader from '../components/ui/SectionHeader';
 import Button from '../components/ui/Button';
 import Card, { CardContent } from '../components/ui/Card';
 import SEO from '../components/ui/SEO';
@@ -106,8 +107,11 @@ export default function Home() {
 
       {/* Technologies Section */}
       <section className="px-4 text-center">
-        <h2 className="text-3xl font-bold mb-4">Technologies We Master</h2>
-        <p className="text-slate-400 mb-10 max-w-2xl mx-auto">We use the most modern and robust technologies to build software that scales securely.</p>
+        <SectionHeader 
+          title="Technologies We Master" 
+          subtitle="We use the most modern and robust technologies to build software that scales securely."
+          badge="Tech Stack"
+        />
         <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
           {['React', 'Node.js', 'Next.js', 'MongoDB', 'PostgreSQL', 'AWS', 'Google Cloud', 'Tailwind CSS', 'Docker', 'Stripe', 'Redis'].map(tech => (
             <div key={tech} className="px-6 py-3 bg-surface-elevated/50 border border-slate-700/50 rounded-full text-slate-300 font-medium hover:bg-slate-800 hover:text-primary transition-colors cursor-default">
@@ -119,7 +123,10 @@ export default function Home() {
 
       {/* Testimonials Section */}
       <section className="px-4">
-        <h2 className="text-3xl font-bold mb-10 text-center">What Our Clients Say</h2>
+        <SectionHeader 
+          title="What Our Clients Say" 
+          badge="Testimonials"
+        />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             { name: "Sarah Jenkins", role: "CEO at TechFlow", quote: "DevForge delivered our SaaS platform ahead of schedule. The code quality and UI design are world-class." },
