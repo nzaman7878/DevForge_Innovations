@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
 import { AuthProvider } from './context/AuthContext';
@@ -32,16 +32,13 @@ const AdminLeads = lazy(() => import('./pages/admin/AdminLeads'));
 const AdminClientProjects = lazy(() => import('./pages/admin/AdminClientProjects'));
 const ClientDashboard = lazy(() => import('./pages/client/ClientDashboard'));
 
-function App() {
+function AnimatedRoutes() {
+  const location = useLocation();
+  
   return (
-    <AuthProvider>
-      <Router>
-        <div className="min-h-screen flex flex-col font-sans">
-          <Navbar />
-
-          <main id="main-content" className="flex-1 max-w-7xl mx-auto w-full">
-            <Suspense fallback={<div className="flex-1 flex items-center justify-center text-slate-400 py-24">Loading route...</div>}>
-              <Routes>
+    <main key={location.pathname} id="main-content" className="flex-1 max-w-7xl mx-auto w-full animate-in fade-in duration-300">
+      <Suspense fallback={<div className="flex-1 flex items-center justify-center text-slate-400 py-24">Loading route...</div>}>
+        <Routes location={location}>
                 <Route path="/" element={<Home />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/portfolio" element={<Portfolio />} />
@@ -69,9 +66,20 @@ function App() {
                 <Route path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
                 
                 <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </main>
+        </Routes>
+      </Suspense>
+    </main>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <div className="min-h-screen flex flex-col font-sans">
+          <Navbar />
+          
+          <AnimatedRoutes />
           
           <Footer />
           <Toaster 

@@ -5,21 +5,42 @@ import SectionHeader from '../components/ui/SectionHeader';
 import Button from '../components/ui/Button';
 import Card, { CardContent } from '../components/ui/Card';
 import SEO from '../components/ui/SEO';
+import RevealOnScroll from '../components/ui/RevealOnScroll';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export default function Home() {
   const [stats, setStats] = useState({ projects: 0, clients: 0, uptime: 0 });
+  const { ref: statsRef, isVisible: statsVisible } = useScrollReveal();
 
   useEffect(() => {
-    // Simple animated counters
-    const interval = setInterval(() => {
-      setStats(prev => ({
-        projects: prev.projects < 50 ? prev.projects + 1 : 50,
-        clients: prev.clients < 40 ? prev.clients + 1 : 40,
-        uptime: prev.uptime < 99 ? prev.uptime + 1 : 99,
-      }));
-    }, 40);
-    return () => clearInterval(interval);
-  }, []);
+    if (!statsVisible) return;
+    
+    let startTimestamp = null;
+    const duration = 1500;
+    const targetProjects = 50;
+    const targetClients = 40;
+    const targetUptime = 99;
+
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const easeProgress = easeOutCubic(progress);
+
+      setStats({
+        projects: Math.floor(easeProgress * targetProjects),
+        clients: Math.floor(easeProgress * targetClients),
+        uptime: Math.floor(easeProgress * targetUptime),
+      });
+
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+
+    window.requestAnimationFrame(step);
+  }, [statsVisible]);
 
   return (
     <div className="flex flex-col gap-24 py-16">
@@ -52,8 +73,9 @@ export default function Home() {
       </section>
 
       {/* Feature Highlights */}
-      <section className="px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <RevealOnScroll>
+        <section className="px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card hover className="bg-surface-elevated/50 backdrop-blur">
             <CardContent className="p-8 flex flex-col items-center text-center">
               <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
@@ -81,11 +103,12 @@ export default function Home() {
               <p className="text-slate-400 text-sm leading-relaxed">Intelligent automation and generative AI solutions to give your business a competitive edge.</p>
             </CardContent>
           </Card>
-        </div>
-      </section>
+          </div>
+        </section>
+      </RevealOnScroll>
 
       {/* Statistics Section */}
-      <section className="px-4 py-16 bg-slate-800/20 rounded-3xl border border-slate-800/50 mx-4">
+      <section ref={statsRef} className={`px-4 py-16 bg-slate-800/20 rounded-3xl border border-slate-800/50 mx-4 transition-all duration-700 ease-out ${statsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           <div className="flex flex-col items-center gap-2">
             <div className="flex items-center justify-center w-12 h-12 bg-primary/20 text-primary rounded-full mb-2"><CheckCircle size={24} /></div>
@@ -106,8 +129,9 @@ export default function Home() {
       </section>
 
       {/* Technologies Section */}
-      <section className="px-4 text-center">
-        <SectionHeader 
+      <RevealOnScroll>
+        <section className="px-4 text-center">
+          <SectionHeader 
           title="Technologies We Master" 
           subtitle="We use the most modern and robust technologies to build software that scales securely."
           badge="Tech Stack"
@@ -120,61 +144,66 @@ export default function Home() {
           ))}
         </div>
       </section>
+      </RevealOnScroll>
 
       {/* Testimonials Section */}
-      <section className="px-4">
-        <SectionHeader 
-          title="What Our Clients Say" 
-          badge="Testimonials"
-        />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            { name: "Sarah Jenkins", role: "CEO at TechFlow", quote: "DevForge delivered our SaaS platform ahead of schedule. The code quality and UI design are world-class." },
-            { name: "Marcus Rossi", role: "Founder, RetailGenius", quote: "Working with them was incredible. They integrated AI into our ecommerce site which boosted conversions by 40%." },
-            { name: "Aisha Patel", role: "CTO, HealthSync", quote: "A truly professional agency. Their architectural decisions saved us months of technical debt." }
-          ].map((test, i) => (
-            <Card key={i} className="bg-surface-elevated/40 border-slate-800">
-              <CardContent className="p-8">
-                <div className="flex gap-1 mb-4 text-emerald-400">
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
-                </div>
-                <p className="text-slate-300 italic mb-6">"{test.quote}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-primary font-bold">
-                    {test.name.charAt(0)}
+      <RevealOnScroll>
+        <section className="px-4">
+          <SectionHeader 
+            title="What Our Clients Say" 
+            badge="Testimonials"
+          />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { name: "Sarah Jenkins", role: "CEO at TechFlow", quote: "DevForge delivered our SaaS platform ahead of schedule. The code quality and UI design are world-class." },
+              { name: "Marcus Rossi", role: "Founder, RetailGenius", quote: "Working with them was incredible. They integrated AI into our ecommerce site which boosted conversions by 40%." },
+              { name: "Aisha Patel", role: "CTO, HealthSync", quote: "A truly professional agency. Their architectural decisions saved us months of technical debt." }
+            ].map((test, i) => (
+              <Card key={i} className="bg-surface-elevated/40 border-slate-800">
+                <CardContent className="p-8">
+                  <div className="flex gap-1 mb-4 text-emerald-400">
+                    <Star size={16} fill="currentColor" />
+                    <Star size={16} fill="currentColor" />
+                    <Star size={16} fill="currentColor" />
+                    <Star size={16} fill="currentColor" />
+                    <Star size={16} fill="currentColor" />
                   </div>
-                  <div>
-                    <p className="text-sm font-semibold text-white">{test.name}</p>
-                    <p className="text-xs text-slate-400">{test.role}</p>
+                  <p className="text-slate-300 italic mb-6">"{test.quote}"</p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-primary font-bold">
+                      {test.name.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-white">{test.name}</p>
+                      <p className="text-xs text-slate-400">{test.role}</p>
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+      </RevealOnScroll>
 
       {/* CTA Section */}
-      <section className="px-4 pb-12">
-        <div className="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700 rounded-3xl p-10 md:p-16 text-center shadow-2xl relative overflow-hidden">
-          <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/20 blur-3xl rounded-full"></div>
-          <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-emerald-500/20 blur-3xl rounded-full"></div>
-          
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 relative z-10">Ready to build something amazing?</h2>
-          <p className="text-slate-400 text-lg mb-10 max-w-2xl mx-auto relative z-10">
-            Let's discuss your next project. We provide a free technical consultation and a detailed project proposal.
-          </p>
-          <Link to="/contact" className="relative z-10">
-            <Button size="lg" className="px-8 shadow-xl shadow-primary/20">
-              Get Your Free Consultation
-            </Button>
-          </Link>
-        </div>
-      </section>
+      <RevealOnScroll>
+        <section className="px-4 pb-12">
+          <div className="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700 rounded-3xl p-10 md:p-16 text-center shadow-2xl relative overflow-hidden">
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/20 blur-3xl rounded-full"></div>
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-emerald-500/20 blur-3xl rounded-full"></div>
+            
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 relative z-10">Ready to build something amazing?</h2>
+            <p className="text-slate-400 text-lg mb-10 max-w-2xl mx-auto relative z-10">
+              Let's discuss your next project. We provide a free technical consultation and a detailed project proposal.
+            </p>
+            <Link to="/contact" className="relative z-10">
+              <Button size="lg" className="px-8 shadow-xl shadow-primary/20">
+                Get Your Free Consultation
+              </Button>
+            </Link>
+          </div>
+        </section>
+      </RevealOnScroll>
 
     </div>
   );

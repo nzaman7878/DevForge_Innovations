@@ -2,19 +2,23 @@ import React from 'react';
 import { Target, Users, Award } from 'lucide-react';
 import SEO from '../components/ui/SEO';
 import SectionHeader from '../components/ui/SectionHeader';
+import RevealOnScroll from '../components/ui/RevealOnScroll';
 
 export default function About() {
   return (
     <div className="py-12 px-4">
       <SEO title="About Us" description="We are a team of passionate engineers, designers, and product strategists." />
-      <SectionHeader 
-        title="About DevForge" 
-        subtitle="We are a team of passionate engineers, designers, and product strategists dedicated to crafting exceptional digital experiences."
-        badge="Our Story"
-        isMainHeading={true}
-      />
+      <RevealOnScroll>
+        <SectionHeader 
+          title="About DevForge" 
+          subtitle="We are a team of passionate engineers, designers, and product strategists dedicated to crafting exceptional digital experiences."
+          badge="Our Story"
+          isMainHeading={true}
+        />
+      </RevealOnScroll>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
+      <RevealOnScroll>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
         <div>
           <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
           <p className="text-slate-400 leading-relaxed mb-6">
@@ -38,9 +42,11 @@ export default function About() {
             <div className="text-sm text-slate-400 font-medium">Client Satisfaction Rate</div>
           </div>
         </div>
-      </div>
+        </div>
+      </RevealOnScroll>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <RevealOnScroll>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="text-center px-4">
           <div className="mx-auto w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-6">
             <Target className="text-primary" size={28} />
@@ -61,8 +67,9 @@ export default function About() {
           </div>
           <h3 className="text-xl font-bold mb-3">Excellence</h3>
           <p className="text-slate-400 text-sm">We don't settle for average. Our standard is industry-leading software that drives measurable results.</p>
+          </div>
         </div>
-      </div>
+      </RevealOnScroll>
     </div>
   );
 }

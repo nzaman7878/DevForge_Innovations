@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import Button from '../components/ui/Button';
 import SectionHeader from '../components/ui/SectionHeader';
 import SEO from '../components/ui/SEO';
+import RevealOnScroll from '../components/ui/RevealOnScroll';
 
 export default function Pricing() {
   const [loading, setLoading] = useState(false);
@@ -55,14 +56,17 @@ export default function Pricing() {
     <div className="pt-24 pb-20">
       <SEO title="Pricing" description="Simple, transparent pricing. Choose the package that fits your business needs." />
       <div className="container mx-auto px-6 max-w-6xl">
-        <SectionHeader 
-          title={<>Simple, transparent <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">pricing</span></>}
-          subtitle="Choose the package that fits your business needs. No hidden fees, just premium delivery."
-          badge="Pricing"
-          isMainHeading={true}
-        />
+        <RevealOnScroll>
+          <SectionHeader 
+            title={<>Simple, transparent <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">pricing</span></>}
+            subtitle="Choose the package that fits your business needs. No hidden fees, just premium delivery."
+            badge="Pricing"
+            isMainHeading={true}
+          />
+        </RevealOnScroll>
 
-        <div className="grid md:grid-cols-3 gap-8 items-center">
+        <RevealOnScroll>
+          <div className="grid md:grid-cols-3 gap-8 items-center">
           {packages.map((pkg) => (
             <div 
               key={pkg.id} 
@@ -106,7 +110,8 @@ export default function Pricing() {
               </Button>
             </div>
           ))}
-        </div>
+          </div>
+        </RevealOnScroll>
       </div>
     </div>
   );

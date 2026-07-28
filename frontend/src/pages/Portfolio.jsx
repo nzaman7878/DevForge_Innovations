@@ -5,6 +5,7 @@ import { CardSkeleton, PageSkeleton } from '../components/ui/Skeleton';
 import SectionHeader from '../components/ui/SectionHeader';
 import { ExternalLink, GitBranch } from 'lucide-react';
 import SEO from '../components/ui/SEO';
+import RevealOnScroll from '../components/ui/RevealOnScroll';
 
 export default function Portfolio() {
   const [projects, setProjects] = useState([]);
@@ -34,15 +35,18 @@ export default function Portfolio() {
   return (
     <div className="py-12 px-4">
       <SEO title="Our Portfolio" description="Explore our recent projects and see how we've helped businesses transform their digital presence." />
-      <SectionHeader 
-        title="Our Work" 
-        subtitle="Explore our recent projects and see how we've helped businesses transform their digital presence."
-        badge="Case Studies"
-        isMainHeading={true}
-      />
+      <RevealOnScroll>
+        <SectionHeader 
+          title="Our Work" 
+          subtitle="Explore our recent projects and see how we've helped businesses transform their digital presence."
+          badge="Case Studies"
+          isMainHeading={true}
+        />
+      </RevealOnScroll>
 
       {/* Filter Bar */}
-      <div className="flex flex-wrap justify-center gap-3 mb-12">
+      <RevealOnScroll>
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
         {categories.map(cat => (
           <button
             key={cat}
@@ -57,9 +61,11 @@ export default function Portfolio() {
             {cat}
           </button>
         ))}
-      </div>
+        </div>
+      </RevealOnScroll>
 
-      {loading ? (
+      <RevealOnScroll>
+        {loading ? (
         <PageSkeleton className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {Array.from({ length: 6 }).map((_, i) => <CardSkeleton key={i} />)}
         </PageSkeleton>
@@ -117,6 +123,7 @@ export default function Portfolio() {
           ))}
         </div>
       )}
+      </RevealOnScroll>
     </div>
   );
 }
