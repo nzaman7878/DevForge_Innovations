@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Pencil, Trash2, Plus } from 'lucide-react';
 import Button from '../../components/ui/Button';
-import Modal from '../../components/ui/Modal';
 import Input from '../../components/ui/Input';
+import { PageSkeleton } from '../../components/ui/Skeleton';
+import Modal from '../../components/ui/Modal';
 
 export default function AdminPosts() {
   const [posts, setPosts] = useState([]);
@@ -122,7 +123,11 @@ export default function AdminPosts() {
 
       <div className="bg-surface-elevated/30 border border-slate-800 rounded-2xl overflow-hidden">
         {loading ? (
-          <div className="p-8 text-center text-slate-400">Loading posts...</div>
+          <PageSkeleton className="p-6 space-y-4">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="h-12 bg-slate-800/60 rounded animate-pulse w-full" />
+            ))}
+          </PageSkeleton>
         ) : posts.length === 0 ? (
           <div className="p-8 text-center text-slate-400">No posts found. Create one to get started.</div>
         ) : (

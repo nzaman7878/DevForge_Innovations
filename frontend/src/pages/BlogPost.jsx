@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import { Calendar, User, ArrowLeft } from 'lucide-react';
 import Button from '../components/ui/Button';
 import SEO from '../components/ui/SEO';
+import { PageSkeleton } from '../components/ui/Skeleton';
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -27,7 +28,23 @@ export default function BlogPost() {
     fetchPost();
   }, [slug]);
 
-  if (loading) return <div className="text-center text-slate-400 py-24">Loading article...</div>;
+  if (loading) return (
+    <PageSkeleton className="py-12 px-4 max-w-3xl mx-auto w-full space-y-8">
+      <div className="h-4 w-40 bg-slate-800/60 rounded animate-pulse" />
+      <div className="space-y-4">
+        <div className="h-10 bg-slate-800/60 rounded animate-pulse w-3/4" />
+        <div className="h-10 bg-slate-800/60 rounded animate-pulse w-1/2" />
+      </div>
+      <div className="flex gap-4">
+        <div className="h-4 w-24 bg-slate-800/60 rounded animate-pulse" />
+        <div className="h-4 w-24 bg-slate-800/60 rounded animate-pulse" />
+      </div>
+      <div className="h-64 bg-slate-800/60 rounded-2xl animate-pulse" />
+      <div className="space-y-3">
+        {Array.from({ length: 8 }).map((_, i) => <div key={i} className={`h-4 bg-slate-800/60 rounded animate-pulse ${i % 3 === 0 ? 'w-full' : i % 3 === 1 ? 'w-5/6' : 'w-4/5'}`} />)}
+      </div>
+    </PageSkeleton>
+  );
   
   if (error || !post) return (
     <div className="text-center py-24">

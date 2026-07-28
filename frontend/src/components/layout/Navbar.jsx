@@ -1,14 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import Button from '../ui/Button';
 import { useAuth } from '../../context/AuthContext';
-import { User, LayoutDashboard, Settings, LogOut, ChevronDown } from 'lucide-react';
+import { User, LayoutDashboard, Settings, LogOut, ChevronDown, Menu, X } from 'lucide-react';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -20,14 +27,26 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [mobileMenuOpen]);
+
   const handleKeyDown = (e) => {
     if (e.key === 'Escape') {
       setDropdownOpen(false);
+      setMobileMenuOpen(false);
     }
   };
 
   const handleLogout = () => {
     setDropdownOpen(false);
+    setMobileMenuOpen(false);
     logout();
     navigate('/');
   };
@@ -37,25 +56,39 @@ export default function Navbar() {
   const activeStyle = ({ isActive }) =>
     isActive ? "text-primary font-medium transition-colors" : "hover:text-primary transition-colors text-slate-300";
 
+  const mobileActiveStyle = ({ isActive }) =>
+    isActive
+      ? "text-primary font-medium text-lg py-2 transition-colors"
+      : "text-slate-300 hover:text-white text-lg py-2 transition-colors";
+
+  const navLinks = [
+    { to: '/', label: 'Home' },
+    { to: '/services', label: 'Services' },
+    { to: '/portfolio', label: 'Portfolio' },
+    { to: '/pricing', label: 'Pricing' },
+    { to: '/about', label: 'About' },
+    { to: '/blog', label: 'Blog' },
+  ];
+
   return (
     <>
     <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white p-2 rounded z-[100]">
       Skip to main content
     </a>
-    <header className="border-b border-slate-800 bg-surface/80 backdrop-blur-md sticky top-0 z-50">
+    <header className="border-b border-slate-800 bg-surface/80 backdrop-blur-md sticky top-0 z-50" onKeyDown={handleKeyDown}>
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="text-xl font-bold text-primary tracking-tight">DevForge</Link>
+
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-8 text-sm">
-          <NavLink to="/" className={activeStyle}>Home</NavLink>
-          <NavLink to="/services" className={activeStyle}>Services</NavLink>
-          <NavLink to="/portfolio" className={activeStyle}>Portfolio</NavLink>
-          <NavLink to="/pricing" className={activeStyle}>Pricing</NavLink>
-          <NavLink to="/about" className={activeStyle}>About</NavLink>
-          <NavLink to="/blog" className={activeStyle}>Blog</NavLink>
+          {navLinks.map(link => (
+            <NavLink key={link.to} to={link.to} className={activeStyle}>{link.label}</NavLink>
+          ))}
         </nav>
-        <div className="flex items-center gap-4">
+
+        <div className="flex items-center gap-3">
           {user ? (
-            <div className="relative" ref={dropdownRef} onKeyDown={handleKeyDown}>
+            <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 className="flex items-center gap-2 group hover:bg-slate-800/50 p-1.5 pr-3 rounded-full transition-colors border border-transparent hover:border-slate-700 focus:outline-none focus:ring-2 focus:ring-primary/50"
@@ -132,12 +165,50 @@ export default function Navbar() {
           ) : (
             <>
               <Link to="/login" className="text-sm text-slate-300 hover:text-white hidden sm:inline-block">Sign In</Link>
-              <Link to="/contact">
+              <Link to="/contact" className="hidden sm:inline-block">
                 <Button variant="primary" size="sm">Get in Touch</Button>
               </Link>
             </>
           )}
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50"
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
+      </div>
+
+      {/* Mobile Navigation Panel */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          mobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <nav className="flex flex-col px-4 pb-6 pt-2 border-t border-slate-800/50 bg-surface/95 backdrop-blur-lg">
+          {navLinks.map(link => (
+            <NavLink key={link.to} to={link.to} className={mobileActiveStyle}>
+              {link.label}
+            </NavLink>
+          ))}
+          
+          <div className="h-px bg-slate-800 my-3" />
+          
+          {!user && (
+            <div className="flex flex-col gap-3 pt-1">
+              <Link to="/login" className="text-slate-300 hover:text-white text-lg py-2 transition-colors">
+                Sign In
+              </Link>
+              <Link to="/contact">
+                <Button variant="primary" size="md" className="w-full">Get in Touch</Button>
+              </Link>
+            </div>
+          )}
+        </nav>
       </div>
     </header>
     </>

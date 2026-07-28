@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import Card, { CardContent, CardHeader } from '../components/ui/Card';
+import { PageSkeleton } from '../components/ui/Skeleton';
 import { User, Upload, Trash2, Loader2, Camera } from 'lucide-react';
 
 export default function Profile() {
@@ -124,7 +125,24 @@ export default function Profile() {
   };
 
   if (loading) {
-    return <div className="py-24 text-center text-slate-400">Loading profile...</div>;
+    return (
+      <PageSkeleton className="pt-24 pb-12">
+        <div className="container mx-auto px-6 max-w-4xl space-y-8">
+          <div className="flex flex-col items-center gap-6">
+            <div className="w-32 h-32 rounded-full bg-slate-800/60 animate-pulse" />
+            <div className="h-6 w-40 bg-slate-800/60 rounded animate-pulse" />
+          </div>
+          <div className="bg-surface border border-slate-800 rounded-2xl p-8 space-y-6">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="space-y-2">
+                <div className="h-3 w-20 bg-slate-800/60 rounded animate-pulse" />
+                <div className="h-10 bg-slate-800/60 rounded-lg animate-pulse" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </PageSkeleton>
+    );
   }
 
   return (

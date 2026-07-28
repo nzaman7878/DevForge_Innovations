@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Card, { CardContent } from '../components/ui/Card';
+import { CardSkeleton, PageSkeleton } from '../components/ui/Skeleton';
 import { Calendar, User } from 'lucide-react';
 import SEO from '../components/ui/SEO';
 
@@ -34,7 +35,9 @@ export default function Blog() {
       </div>
 
       {loading ? (
-        <div className="text-center text-slate-400 py-12">Loading articles...</div>
+        <PageSkeleton className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {Array.from({ length: 6 }).map((_, i) => <CardSkeleton key={i} />)}
+        </PageSkeleton>
       ) : posts.length === 0 ? (
         <div className="text-center text-slate-500 py-12 border border-slate-800 rounded-2xl bg-surface-elevated/30">
           No blog posts published yet.

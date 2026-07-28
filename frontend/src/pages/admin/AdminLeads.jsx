@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Trash2, MessageSquare, Building2, User, Sparkles } from 'lucide-react';
 import Button from '../../components/ui/Button';
+import Modal from '../../components/ui/Modal';
+import { LeadCardSkeleton } from '../../components/ui/Skeleton';
 
 export default function AdminLeads() {
   const [leads, setLeads] = useState([]);
@@ -70,7 +72,10 @@ export default function AdminLeads() {
 
       <div className="bg-surface-elevated/30 border border-slate-800 rounded-2xl overflow-hidden">
         {loading ? (
-          <div className="p-8 text-center text-slate-400">Loading leads...</div>
+          <div role="status" aria-live="polite" className="divide-y divide-slate-800/60">
+            <span className="sr-only">Loading leads...</span>
+            {Array.from({ length: 3 }).map((_, i) => <LeadCardSkeleton key={i} />)}
+          </div>
         ) : leads.length === 0 ? (
           <div className="p-8 text-center text-slate-400">No leads yet. Inbox zero!</div>
         ) : (

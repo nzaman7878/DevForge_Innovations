@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import Card, { CardContent } from '../../components/ui/Card';
+import { StatCardSkeleton, PageSkeleton } from '../../components/ui/Skeleton';
 import { Users, FileText, Briefcase, TrendingUp, FolderKanban } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -33,7 +34,30 @@ export default function Dashboard() {
   ];
 
   if (loading) {
-    return <div className="py-12 text-center text-slate-400">Loading dashboard...</div>;
+    return (
+      <PageSkeleton>
+        <div className="mb-8 space-y-3">
+          <div className="h-8 bg-slate-800/60 rounded animate-pulse w-64" />
+          <div className="h-4 bg-slate-800/60 rounded animate-pulse w-80" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
+          {Array.from({ length: 5 }).map((_, i) => <StatCardSkeleton key={i} />)}
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="bg-surface border border-slate-800 rounded-2xl p-6 space-y-4">
+            <div className="h-5 w-32 bg-slate-800/60 rounded animate-pulse" />
+            {Array.from({ length: 3 }).map((_, i) => <div key={i} className="h-12 bg-slate-800/60 rounded animate-pulse" />)}
+          </div>
+          <div className="bg-surface border border-slate-800 rounded-2xl p-6 space-y-4">
+            <div className="h-5 w-32 bg-slate-800/60 rounded animate-pulse" />
+            <div className="flex gap-4">
+              <div className="h-9 w-28 bg-slate-800/60 rounded-md animate-pulse" />
+              <div className="h-9 w-28 bg-slate-800/60 rounded-md animate-pulse" />
+            </div>
+          </div>
+        </div>
+      </PageSkeleton>
+    );
   }
 
   return (

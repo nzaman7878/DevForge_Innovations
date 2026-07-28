@@ -47,7 +47,35 @@ export default function ClientDashboard() {
         </div>
 
         {loading ? (
-          <div className="text-center text-slate-400 py-12">Loading your projects...</div>
+          <div role="status" aria-live="polite">
+            <span className="sr-only">Loading your projects...</span>
+            <div className="grid md:grid-cols-2 gap-6">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} className="bg-surface border border-slate-800 rounded-3xl p-8 space-y-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-slate-800/60 animate-pulse" />
+                    <div className="space-y-2 flex-1">
+                      <div className="h-3 w-20 bg-slate-800/60 rounded animate-pulse" />
+                      <div className="h-5 w-40 bg-slate-800/60 rounded animate-pulse" />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="h-3 w-full bg-slate-800/60 rounded animate-pulse" />
+                    <div className="h-3 w-3/4 bg-slate-800/60 rounded animate-pulse" />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between">
+                      <div className="h-3 w-24 bg-slate-800/60 rounded animate-pulse" />
+                      <div className="h-3 w-10 bg-slate-800/60 rounded animate-pulse" />
+                    </div>
+                    <div className="w-full bg-slate-900 rounded-full h-2 border border-slate-800">
+                      <div className="bg-slate-800/60 h-2 rounded-full animate-pulse w-1/2" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         ) : projects.length === 0 ? (
           <div className="bg-surface border border-slate-800 rounded-3xl p-12 text-center shadow-xl">
             <Briefcase size={48} className="text-slate-600 mx-auto mb-4" />
