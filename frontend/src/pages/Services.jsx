@@ -9,8 +9,8 @@ export default function Services() {
   const services = [
     {
       icon: <Globe size={48} />,
-      iconColor: "text-blue-400",
-      iconBg: "bg-blue-500/10 border-blue-500/20",
+      iconColor: "text-primary",
+      iconBg: "bg-primary/10 border-primary/20",
       title: "Custom Web Applications",
       description: "We build fast, secure, and scalable web applications using the MERN stack, Next.js, and modern architectural patterns. Our solutions are designed to handle massive traffic while delivering buttery-smooth user experiences that keep your audience engaged."
     },

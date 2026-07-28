@@ -115,7 +115,7 @@ export default function Portfolio() {
                 </div>
 
                 <div className="mt-auto pt-5">
-                  <a href={project.liveLink || project.githubLink || "#"} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-primary hover:text-blue-400 font-medium transition-colors group/link">
+                  <a href={project.liveLink || project.githubLink || "#"} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary-hover font-medium transition-colors group/link">
                     View Case Study <ArrowRight size={16} className="transform group-hover/link:translate-x-1 transition-transform" />
                   </a>
                 </div>

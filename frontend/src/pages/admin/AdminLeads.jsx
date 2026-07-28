@@ -51,7 +51,7 @@ export default function AdminLeads() {
 
   const getStatusColor = (status) => {
     switch(status) {
-      case 'New': return 'bg-blue-500/10 text-blue-400 border-blue-500/20';
+      case 'New': return 'bg-primary/10 text-primary border-primary/20';
       case 'Contacted': return 'bg-amber-500/10 text-amber-400 border-amber-500/20';
       case 'Qualified': return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
       case 'Closed': return 'bg-slate-500/10 text-slate-400 border-slate-500/20';

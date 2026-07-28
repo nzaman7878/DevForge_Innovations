@@ -26,7 +26,7 @@ export default function Dashboard() {
   }, []);
 
   const statsList = [
-    { label: 'Public Projects', value: data.stats?.projects || 0, icon: <Briefcase className="text-blue-400" size={24} /> },
+    { label: 'Public Projects', value: data.stats?.projects || 0, icon: <Briefcase className="text-primary" size={24} /> },
     { label: 'Client Projects', value: data.stats?.clientProjects || 0, icon: <FolderKanban className="text-indigo-400" size={24} /> },
     { label: 'Published Posts', value: data.stats?.posts || 0, icon: <FileText className="text-emerald-400" size={24} /> },
     { label: 'Total Leads', value: data.stats?.leads || 0, icon: <Users className="text-purple-400" size={24} /> },

@@ -86,7 +86,7 @@ export default function Login() {
             <Button type="submit" className="w-full mt-4 h-12 text-base">Sign In</Button>
             
             <p className="text-center text-sm text-slate-400 mt-6">
-              Don't have an account? <Link to="/register" className="text-primary hover:text-blue-400 font-medium transition-colors">Create one now</Link>
+              Don't have an account? <Link to="/register" className="text-primary hover:text-primary-hover font-medium transition-colors">Create one now</Link>
             </p>
           </form>
         </div>

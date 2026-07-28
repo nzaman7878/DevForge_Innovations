@@ -48,21 +48,21 @@ export default function About() {
       <RevealOnScroll>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="text-center px-4">
-            <div className="mx-auto w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-6">
+            <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
               <Target className="text-primary" size={28} />
             </div>
             <h3 className="text-xl font-bold mb-3">Precision</h3>
             <p className="text-slate-400 text-sm">Every pixel and line of code is meticulously crafted to ensure optimal performance and aesthetics.</p>
           </div>
           <div className="text-center px-4">
-            <div className="mx-auto w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-6">
+            <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
               <Users className="text-primary" size={28} />
             </div>
             <h3 className="text-xl font-bold mb-3">Collaboration</h3>
             <p className="text-slate-400 text-sm">We work as an extension of your team, ensuring transparency and continuous communication.</p>
           </div>
           <div className="text-center px-4">
-            <div className="mx-auto w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-6">
+            <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
               <Award className="text-primary" size={28} />
             </div>
             <h3 className="text-xl font-bold mb-3">Excellence</h3>

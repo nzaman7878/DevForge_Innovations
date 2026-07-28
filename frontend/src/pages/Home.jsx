@@ -58,7 +58,7 @@ export default function Home() {
             <span>Transforming Ideas into Digital Reality</span>
           </div>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-8 animate-in fade-in slide-in-from-bottom-6 duration-700">
-            Build the <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-primary">Future</span> of Your Business
+            Build the <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-hover to-primary">Future</span> of Your Business
           </h1>
           <p className="text-xl text-slate-400 mb-10 max-w-2xl leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-700">
             DevForge Innovations is a premium software development agency specializing in bespoke web applications, mobile experiences, and AI-driven solutions.

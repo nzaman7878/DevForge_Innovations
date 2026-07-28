@@ -12,6 +12,7 @@ export default function BlogPost() {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -27,6 +28,23 @@ export default function BlogPost() {
     };
     fetchPost();
   }, [slug]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+      const clientHeight = document.documentElement.clientHeight || window.innerHeight;
+      
+      const windowHeight = scrollHeight - clientHeight;
+      if (windowHeight <= 0) return;
+      
+      const progress = (scrollTop / windowHeight) * 100;
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   if (loading) return (
     <PageSkeleton className="py-12 px-4 max-w-3xl mx-auto w-full space-y-8">
@@ -56,7 +74,13 @@ export default function BlogPost() {
   );
 
   return (
-    <article className="py-12 px-4 max-w-3xl mx-auto w-full">
+    <>
+      {/* Scroll Progress Bar */}
+      <div 
+        className="fixed top-0 left-0 h-[3px] bg-primary shadow-[0_0_10px_rgba(56,189,248,0.7)] transition-all duration-100 ease-out"
+        style={{ width: `${scrollProgress}%`, zIndex: 60 }}
+      />
+      <article className="py-12 px-4 max-w-3xl mx-auto w-full">
       <SEO 
         title={post.title} 
         description={post.excerpt} 
@@ -107,5 +131,6 @@ export default function BlogPost() {
         </ReactMarkdown>
       </div>
     </article>
+    </>
   );
 }

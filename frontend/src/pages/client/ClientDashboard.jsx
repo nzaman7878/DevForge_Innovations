@@ -28,7 +28,7 @@ export default function ClientDashboard() {
   const getStatusIcon = (status) => {
     switch(status) {
       case 'Planning': return <Clock size={20} className="text-amber-400" />;
-      case 'Development': return <Briefcase size={20} className="text-blue-400" />;
+      case 'Development': return <Briefcase size={20} className="text-primary" />;
       case 'Review': return <FileText size={20} className="text-purple-400" />;
       case 'Completed': return <CheckCircle size={20} className="text-emerald-400" />;
       default: return <Clock size={20} className="text-slate-400" />;

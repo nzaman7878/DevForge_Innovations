@@ -9,7 +9,7 @@ export default function PrivateRoute({ children, role }) {
   if (loading) return (
     <div role="status" aria-live="polite" className="flex-1 flex items-center justify-center text-slate-400 py-24">
       <Loader2 size={24} className="animate-spin mr-2" />
-      <span className="sr-only">Loading...</span>
+      <span className="sr-only">Loading content...</span>
     </div>
   );
 

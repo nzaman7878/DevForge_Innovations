@@ -96,7 +96,7 @@ export default function Register() {
             <Button type="submit" className="w-full mt-4 h-12 text-base">Register</Button>
             
             <p className="text-center text-sm text-slate-400 mt-6">
-              Already have an account? <Link to="/login" className="text-primary hover:text-blue-400 font-medium transition-colors">Sign in here</Link>
+              Already have an account? <Link to="/login" className="text-primary hover:text-primary-hover font-medium transition-colors">Sign in here</Link>
             </p>
           </form>
         </div>
