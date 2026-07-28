@@ -47,7 +47,7 @@ export default function Blog() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {posts.map(post => (
             <Link key={post._id} to={`/blog/${post.slug}`}>
-              <Card hover className="h-full flex flex-col bg-surface-elevated/20 border-slate-800/60">
+              <Card hover className="h-full flex flex-col bg-surface-elevated/20">
                 {post.coverImage && (
                   <div className="h-48 w-full overflow-hidden">
                     <img 

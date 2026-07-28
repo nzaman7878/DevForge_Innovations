@@ -54,28 +54,28 @@ export default function Home() {
       {/* Feature Highlights */}
       <section className="px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card hover className="bg-surface-elevated/50 backdrop-blur border-slate-800/60">
+          <Card hover className="bg-surface-elevated/50 backdrop-blur">
             <CardContent className="p-8 flex flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6">
+              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
                 <Code className="text-primary" size={28} />
               </div>
               <h3 className="text-xl font-bold mb-3">Web Development</h3>
               <p className="text-slate-400 text-sm leading-relaxed">Scalable, high-performance web applications built with modern frameworks like React and Next.js.</p>
             </CardContent>
           </Card>
-          <Card hover className="bg-surface-elevated/50 backdrop-blur border-slate-800/60">
+          <Card hover className="bg-surface-elevated/50 backdrop-blur">
             <CardContent className="p-8 flex flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6">
-                <Smartphone className="text-primary" size={28} />
+              <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-6">
+                <Smartphone className="text-accent" size={28} />
               </div>
               <h3 className="text-xl font-bold mb-3">Mobile Apps</h3>
               <p className="text-slate-400 text-sm leading-relaxed">Native and cross-platform mobile experiences that engage users on iOS and Android seamlessly.</p>
             </CardContent>
           </Card>
-          <Card hover className="bg-surface-elevated/50 backdrop-blur border-slate-800/60">
+          <Card hover className="bg-surface-elevated/50 backdrop-blur">
             <CardContent className="p-8 flex flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6">
-                <Zap className="text-primary" size={28} />
+              <div className="w-14 h-14 rounded-2xl bg-highlight/10 flex items-center justify-center mb-6">
+                <Zap className="text-highlight" size={28} />
               </div>
               <h3 className="text-xl font-bold mb-3">AI Integration</h3>
               <p className="text-slate-400 text-sm leading-relaxed">Intelligent automation and generative AI solutions to give your business a competitive edge.</p>
@@ -98,7 +98,7 @@ export default function Home() {
             <p className="text-slate-400 font-medium tracking-wide uppercase text-sm">Happy Clients</p>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <div className="flex items-center justify-center w-12 h-12 bg-blue-500/20 text-blue-400 rounded-full mb-2"><Globe size={24} /></div>
+            <div className="flex items-center justify-center w-12 h-12 bg-highlight/20 text-highlight rounded-full mb-2"><Globe size={24} /></div>
             <h4 className="text-4xl font-extrabold text-white">{stats.uptime}%</h4>
             <p className="text-slate-400 font-medium tracking-wide uppercase text-sm">Client Satisfaction</p>
           </div>

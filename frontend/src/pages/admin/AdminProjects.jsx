@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Pencil, Trash2, Plus } from 'lucide-react';
+import toast from 'react-hot-toast';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
 import { PageSkeleton } from '../../components/ui/Skeleton';
@@ -79,11 +80,11 @@ export default function AdminProjects() {
     const file = e.target.files[0];
     if (file) {
       if (!file.type.startsWith('image/')) {
-        alert('Please select a valid image file');
+        toast.error('Please select a valid image file');
         return;
       }
       if (file.size > 5 * 1024 * 1024) {
-        alert('Image must be less than 5MB');
+        toast.error('Image must be less than 5MB');
         return;
       }
       setImageFile(file);
@@ -94,7 +95,12 @@ export default function AdminProjects() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
-    
+    if (!formData.title || !formData.title.trim()) {
+      toast.error('Project title is required');
+      setSubmitting(false);
+      return;
+    }
+
     try {
       const payload = new FormData();
       payload.append('title', formData.title);
@@ -112,19 +118,21 @@ export default function AdminProjects() {
 
       if (editingProject) {
         await axios.put(`${import.meta.env.VITE_API_URL}/projects/${editingProject._id}`, payload, { headers });
+        toast.success('Project updated successfully');
       } else {
         if (!imageFile) {
-          alert('Please select an image for the project');
+          toast.error('Please select an image for the project');
           setSubmitting(false);
           return;
         }
         await axios.post(`${import.meta.env.VITE_API_URL}/projects`, payload, { headers });
+        toast.success('Project created successfully');
       }
       fetchProjects();
       handleCloseModal();
     } catch (error) {
-      console.error('Error saving project', error);
-      alert('Error saving project');
+      console.error('Error saving project:', error);
+      toast.error('Error saving project');
     } finally {
       setSubmitting(false);
     }

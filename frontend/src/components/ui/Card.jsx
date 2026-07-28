@@ -5,7 +5,7 @@ export default function Card({ children, className = '', hover = false, ...props
   
   return (
     <div 
-      className={`bg-surface border border-slate-800/50 rounded-2xl overflow-hidden ${hoverStyles} ${className}`}
+      className={`bg-surface border border-transparent rounded-2xl overflow-hidden ${hoverStyles} ${className}`}
       {...props}
     >
       {children}

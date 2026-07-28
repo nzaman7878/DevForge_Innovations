@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/layout/Navbar';
@@ -73,6 +74,16 @@ function App() {
           </main>
           
           <Footer />
+          <Toaster 
+            position="bottom-right" 
+            toastOptions={{ 
+              style: { 
+                background: '#1e293b', 
+                color: '#fff',
+                border: '1px solid #334155'
+              } 
+            }} 
+          />
         </div>
       </Router>
     </AuthProvider>

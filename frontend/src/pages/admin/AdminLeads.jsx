@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Trash2, MessageSquare, Building2, User, Sparkles } from 'lucide-react';
+import toast from 'react-hot-toast';
 import Button from '../../components/ui/Button';
 import Modal from '../../components/ui/Modal';
 import { LeadCardSkeleton } from '../../components/ui/Skeleton';
@@ -27,9 +28,11 @@ export default function AdminLeads() {
   const handleStatusChange = async (id, newStatus) => {
     try {
       await axios.put(`${import.meta.env.VITE_API_URL}/leads/${id}/status`, { status: newStatus });
+      toast.success('Lead status updated');
       fetchLeads();
     } catch (error) {
-      console.error('Error updating status', error);
+      console.error('Error updating status:', error);
+      toast.error('Error updating status');
     }
   };
 
@@ -37,9 +40,11 @@ export default function AdminLeads() {
     if (window.confirm('Are you sure you want to delete this lead?')) {
       try {
         await axios.delete(`${import.meta.env.VITE_API_URL}/leads/${id}`);
+        toast.success('Lead deleted');
         fetchLeads();
       } catch (error) {
-        console.error('Error deleting lead', error);
+        console.error('Error deleting lead:', error);
+        toast.error('Error deleting lead');
       }
     }
   };

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { CheckCircle2, Zap } from 'lucide-react';
+import toast from 'react-hot-toast';
 import Button from '../components/ui/Button';
 import SectionHeader from '../components/ui/SectionHeader';
 import SEO from '../components/ui/SEO';
@@ -17,7 +18,7 @@ export default function Pricing() {
       }
     } catch (error) {
       console.error('Checkout error:', error);
-      alert('Checkout failed. Please try again later.');
+      toast.error('Checkout failed. Please try again later.');
     } finally {
       setLoading(false);
     }

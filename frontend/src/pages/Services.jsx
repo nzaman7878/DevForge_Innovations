@@ -7,32 +7,44 @@ import SEO from '../components/ui/SEO';
 export default function Services() {
   const services = [
     {
-      icon: <Globe className="text-primary" size={32} />,
+      icon: <Globe size={32} />,
+      iconColor: "text-primary",
+      iconBg: "bg-primary/10 border-primary/20",
       title: "Custom Web Applications",
       description: "We build fast, secure, and scalable web applications using the MERN stack, Next.js, and modern architectural patterns."
     },
     {
-      icon: <Smartphone className="text-primary" size={32} />,
+      icon: <Smartphone size={32} />,
+      iconColor: "text-accent",
+      iconBg: "bg-accent/10 border-accent/20",
       title: "Mobile App Development",
       description: "Engaging native and cross-platform mobile experiences for iOS and Android using React Native and Flutter."
     },
     {
-      icon: <Code className="text-primary" size={32} />,
+      icon: <Code size={32} />,
+      iconColor: "text-highlight",
+      iconBg: "bg-highlight/10 border-highlight/20",
       title: "UI/UX Design",
       description: "Beautiful, intuitive, and conversion-focused interfaces designed meticulously in Figma to delight your users."
     },
     {
-      icon: <Bot className="text-primary" size={32} />,
+      icon: <Bot size={32} />,
+      iconColor: "text-emerald-400",
+      iconBg: "bg-emerald-500/10 border-emerald-500/20",
       title: "AI & Machine Learning",
       description: "Integrate LLMs, computer vision, and predictive analytics into your products to automate tasks and unlock insights."
     },
     {
-      icon: <Database className="text-primary" size={32} />,
+      icon: <Database size={32} />,
+      iconColor: "text-blue-400",
+      iconBg: "bg-blue-500/10 border-blue-500/20",
       title: "API Development",
       description: "Robust RESTful and GraphQL APIs built with Node.js to power your ecosystem and integrate third-party services."
     },
     {
-      icon: <Cloud className="text-primary" size={32} />,
+      icon: <Cloud size={32} />,
+      iconColor: "text-purple-400",
+      iconBg: "bg-purple-500/10 border-purple-500/20",
       title: "Cloud & DevOps",
       description: "Scalable cloud infrastructure on AWS and GCP with automated CI/CD pipelines to ensure rapid, reliable deployments."
     }
@@ -50,9 +62,9 @@ export default function Services() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((service, idx) => (
-          <Card key={idx} hover className="border-slate-800/80 bg-surface-elevated/30">
+          <Card key={idx} hover className="bg-surface-elevated/30">
             <CardContent className="p-8">
-              <div className="mb-6 bg-slate-800/50 w-16 h-16 rounded-2xl flex items-center justify-center border border-slate-700/50 shadow-inner">
+              <div className={`mb-6 w-16 h-16 rounded-2xl flex items-center justify-center border shadow-inner ${service.iconBg} ${service.iconColor}`}>
                 {service.icon}
               </div>
               <h3 className="text-xl font-bold mb-3">{service.title}</h3>

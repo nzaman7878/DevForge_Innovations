@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Pencil, Trash2, Plus } from 'lucide-react';
+import toast from 'react-hot-toast';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
 import { PageSkeleton } from '../../components/ui/Skeleton';
@@ -74,17 +75,28 @@ export default function AdminClientProjects() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.projectName || !formData.projectName.trim()) {
+      toast.error('Project name is required');
+      return;
+    }
+    if (!formData.clientName || !formData.clientName.trim()) {
+      toast.error('Client name is required');
+      return;
+    }
+
     try {
       if (editingProject) {
         await axios.put(`${import.meta.env.VITE_API_URL}/client-projects/${editingProject._id}`, formData);
+        toast.success('Project updated successfully');
       } else {
         await axios.post(`${import.meta.env.VITE_API_URL}/client-projects`, formData);
+        toast.success('Project created successfully');
       }
       fetchData();
       handleCloseModal();
     } catch (error) {
-      console.error('Error saving project', error);
-      alert('Error saving project');
+      console.error('Error saving project:', error);
+      toast.error('Error saving project');
     }
   };
 
@@ -92,9 +104,11 @@ export default function AdminClientProjects() {
     if (window.confirm('Are you sure you want to delete this client project?')) {
       try {
         await axios.delete(`${import.meta.env.VITE_API_URL}/client-projects/${id}`);
+        toast.success('Project deleted successfully');
         fetchData();
       } catch (error) {
-        console.error('Error deleting project', error);
+        console.error('Error deleting project:', error);
+        toast.error('Error deleting project');
       }
     }
   };

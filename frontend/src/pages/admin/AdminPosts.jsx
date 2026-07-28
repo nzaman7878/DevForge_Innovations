@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Pencil, Trash2, Plus } from 'lucide-react';
+import toast from 'react-hot-toast';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
 import { PageSkeleton } from '../../components/ui/Skeleton';
@@ -84,17 +85,24 @@ export default function AdminPosts() {
       tags: formData.tags.split(',').map(t => t.trim()).filter(t => t)
     };
 
+    if (!formData.title || !formData.title.trim()) {
+      toast.error('Post title is required');
+      return;
+    }
+
     try {
       if (editingPost) {
         await axios.put(`${import.meta.env.VITE_API_URL}/posts/${editingPost._id}`, payload);
+        toast.success('Post updated successfully');
       } else {
         await axios.post(`${import.meta.env.VITE_API_URL}/posts`, payload);
+        toast.success('Post created successfully');
       }
       fetchPosts();
       handleCloseModal();
     } catch (error) {
-      console.error('Error saving post', error);
-      alert('Error saving post');
+      console.error('Error saving post:', error);
+      toast.error('Error saving post');
     }
   };
 
@@ -102,9 +110,11 @@ export default function AdminPosts() {
     if (window.confirm('Are you sure you want to delete this post?')) {
       try {
         await axios.delete(`${import.meta.env.VITE_API_URL}/posts/${id}`);
+        toast.success('Post deleted successfully');
         fetchPosts();
       } catch (error) {
-        console.error('Error deleting post', error);
+        console.error('Error deleting post:', error);
+        toast.error('Error deleting post');
       }
     }
   };
