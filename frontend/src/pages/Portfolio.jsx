@@ -3,9 +3,10 @@ import axios from 'axios';
 import Card, { CardContent } from '../components/ui/Card';
 import { CardSkeleton, PageSkeleton } from '../components/ui/Skeleton';
 import SectionHeader from '../components/ui/SectionHeader';
-import { ExternalLink, GitBranch } from 'lucide-react';
+import { ExternalLink, GitBranch, Layout, Sparkles, ArrowRight } from 'lucide-react';
 import SEO from '../components/ui/SEO';
 import RevealOnScroll from '../components/ui/RevealOnScroll';
+import Button from '../components/ui/Button';
 
 export default function Portfolio() {
   const [projects, setProjects] = useState([]);
@@ -70,23 +71,30 @@ export default function Portfolio() {
           {Array.from({ length: 6 }).map((_, i) => <CardSkeleton key={i} />)}
         </PageSkeleton>
       ) : filteredProjects.length === 0 ? (
-        <div className="text-center text-slate-500 py-12 border border-slate-800 rounded-2xl bg-surface-elevated/30">
-          No projects found for this category.
+        <div className="flex flex-col items-center justify-center text-center py-24 border border-slate-800 border-dashed rounded-3xl bg-surface-elevated/10">
+          <div className="w-24 h-24 rounded-full bg-slate-800/50 flex items-center justify-center mb-6 relative">
+            <Layout size={40} className="text-slate-500" />
+            <Sparkles size={24} className="text-primary absolute -top-1 -right-1" />
+          </div>
+          <h3 className="text-2xl font-bold text-white mb-3">No Projects Yet</h3>
+          <p className="text-slate-400 max-w-sm mb-8 leading-relaxed">We're currently brewing some amazing work in this category. Check back soon for updates!</p>
+          <Button variant="secondary" onClick={() => setFilter('All')}>View All Work</Button>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map(project => (
             <Card key={project._id} hover className="flex flex-col h-full bg-surface-elevated/20">
-              <div className="h-48 w-full bg-slate-800 relative overflow-hidden flex items-center justify-center group">
+              <div className="h-56 w-full bg-slate-800 relative overflow-hidden flex items-center justify-center group/img">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-500 z-10"></div>
                 {project.imageUrl ? (
                   <img 
                     src={project.imageUrl} 
                     alt={project.title}
                     loading="lazy"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-700"
                   />
                 ) : (
-                  <div className="flex flex-col items-center justify-center text-slate-500 w-full h-full bg-slate-800 group-hover:scale-105 transition-transform duration-500">
+                  <div className="flex flex-col items-center justify-center text-slate-500 w-full h-full bg-slate-800 group-hover/img:scale-110 transition-transform duration-700">
                     <span className="text-xl font-bold tracking-wider opacity-20">DEVFORGE</span>
                   </div>
                 )}
@@ -100,23 +108,16 @@ export default function Portfolio() {
                 
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.technologies?.map(tech => (
-                    <span key={tech} className="text-xs text-slate-300 bg-slate-800 px-2 py-1 rounded-md">
+                    <span key={tech} className="text-[11px] uppercase tracking-wider font-semibold text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded">
                       {tech}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex items-center gap-4 mt-auto pt-4 border-t border-slate-800/60">
-                  {project.liveLink && (
-                    <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm text-primary hover:text-blue-400 transition-colors font-medium">
-                      <ExternalLink size={16} /> Live Site
-                    </a>
-                  )}
-                  {project.githubLink && (
-                    <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm text-slate-300 hover:text-white transition-colors font-medium">
-                      <GitBranch size={16} /> Source Code
-                    </a>
-                  )}
+                <div className="mt-auto pt-5">
+                  <a href={project.liveLink || project.githubLink || "#"} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-primary hover:text-blue-400 font-medium transition-colors group/link">
+                    View Case Study <ArrowRight size={16} className="transform group-hover/link:translate-x-1 transition-transform" />
+                  </a>
                 </div>
               </CardContent>
             </Card>

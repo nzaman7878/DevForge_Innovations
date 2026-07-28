@@ -47,26 +47,54 @@ export default function About() {
 
       <RevealOnScroll>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="text-center px-4">
-          <div className="mx-auto w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-6">
-            <Target className="text-primary" size={28} />
+          <div className="text-center px-4">
+            <div className="mx-auto w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-6">
+              <Target className="text-primary" size={28} />
+            </div>
+            <h3 className="text-xl font-bold mb-3">Precision</h3>
+            <p className="text-slate-400 text-sm">Every pixel and line of code is meticulously crafted to ensure optimal performance and aesthetics.</p>
           </div>
-          <h3 className="text-xl font-bold mb-3">Precision</h3>
-          <p className="text-slate-400 text-sm">Every pixel and line of code is meticulously crafted to ensure optimal performance and aesthetics.</p>
+          <div className="text-center px-4">
+            <div className="mx-auto w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-6">
+              <Users className="text-primary" size={28} />
+            </div>
+            <h3 className="text-xl font-bold mb-3">Collaboration</h3>
+            <p className="text-slate-400 text-sm">We work as an extension of your team, ensuring transparency and continuous communication.</p>
+          </div>
+          <div className="text-center px-4">
+            <div className="mx-auto w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-6">
+              <Award className="text-primary" size={28} />
+            </div>
+            <h3 className="text-xl font-bold mb-3">Excellence</h3>
+            <p className="text-slate-400 text-sm">We don't settle for average. Our standard is industry-leading software that drives measurable results.</p>
+          </div>
         </div>
-        <div className="text-center px-4">
-          <div className="mx-auto w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-6">
-            <Users className="text-primary" size={28} />
-          </div>
-          <h3 className="text-xl font-bold mb-3">Collaboration</h3>
-          <p className="text-slate-400 text-sm">We work as an extension of your team, ensuring transparency and continuous communication.</p>
-        </div>
-        <div className="text-center px-4">
-          <div className="mx-auto w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-6">
-            <Award className="text-primary" size={28} />
-          </div>
-          <h3 className="text-xl font-bold mb-3">Excellence</h3>
-          <p className="text-slate-400 text-sm">We don't settle for average. Our standard is industry-leading software that drives measurable results.</p>
+      </RevealOnScroll>
+
+      {/* Team Section */}
+      <RevealOnScroll>
+        <div className="mt-32">
+          <SectionHeader 
+            title="Meet the Leadership" 
+            subtitle="The brilliant minds guiding our engineering and design teams."
+            badge="Team"
+          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { name: "Elena Rodriguez", role: "Founder & CEO", initials: "ER", color: "text-primary bg-primary/10 border-primary/20", bio: "Former engineering lead at Tech Giants, passionate about scalable architecture." },
+              { name: "Marcus Chen", role: "CTO", initials: "MC", color: "text-accent bg-accent/10 border-accent/20", bio: "Distributed systems expert with a love for cloud-native infrastructure." },
+              { name: "Sophia Patel", role: "Head of Design", initials: "SP", color: "text-rose-400 bg-rose-500/10 border-rose-500/20", bio: "Award-winning designer obsessed with micro-interactions and usability." },
+              { name: "David Kim", role: "Lead AI Engineer", initials: "DK", color: "text-amber-400 bg-amber-500/10 border-amber-500/20", bio: "Machine learning researcher pushing the boundaries of generative AI." }
+            ].map((member, i) => (
+              <div key={i} className="flex flex-col items-center text-center p-8 rounded-3xl bg-surface-elevated/20 border border-slate-800/50 hover:bg-surface-elevated/40 transition-colors">
+                <div className={`w-24 h-24 rounded-full flex items-center justify-center text-2xl font-bold mb-6 border ${member.color}`}>
+                  {member.initials}
+                </div>
+                <h4 className="text-lg font-bold text-white mb-1">{member.name}</h4>
+                <p className="text-sm text-primary font-medium mb-4">{member.role}</p>
+                <p className="text-sm text-slate-400 leading-relaxed">{member.bio}</p>
+              </div>
+            ))}
           </div>
         </div>
       </RevealOnScroll>
